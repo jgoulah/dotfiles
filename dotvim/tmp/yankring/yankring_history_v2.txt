@@ -1,0 +1,100 @@
+stop_lighty() {    if test -e $LIGHTY_PID; then        echo STOPPING LIGHTTPD    	sudo $LIGHTY stop    fi},V
+,V
+start_lighty() {    if test ! -e $LIGHTY_PID; then        echo STARTING LIGHTTPD    	sudo $LIGHTY start    fi},V
+    else        stop_lighty    fi,V
+    if test -z "$USE_LIGHTTPD"; then,V
+    else        start_lighty    fi,V
+LIGHTY="/etc/init.d/lighttpd",V
+LIGHTY_PID="/var/run/lighttpd.pid",V
+qa-api01,v
+start_solr() {    if test ! -e $SOLR_PID; then        echo STARTING SOLR    	$SOLR start    fi}stop_solr() {    if test -e $SOLR_PID; then      echo STOPPING SOLR      $SOLR stop    fi},V
+    stop_solr,V
+    start_solr,V
+SOLR="$DEVTOOLS/solr",V
+SOLR_PID="$RUN_DIR/solr.pid",V
+jgoulah,v
+/home.local/jgoulah/,v
+.com,v
+ /etc/sysconfig/gearman_manager,v
+[branch "master"]	remote = origin	merge = refs/heads/master,V
+ 5060  git st,V
+tools - ,v
+ 5058  ls,V
+ 5054  ls -al ./etsypad/infrastructure/ace/lib/rhino-js-1.7r1.jar 5055  rm ./etsypad/infrastructure/ace/lib/rhino-js-1.7r1.jar ./etsypad/infrastructure/ace/lib/yuicompressor-2.4-appjet.jar 5056  ls,V
+ 5050  ls,V
+    } else {      svn_update($module, "$dir/$module/$branch", $revision);    },V
+    if (!file_exists("$dir/$module")) {      //svn_checkout($module, "$dir/$module/$branch", $revision);,V
+/,v
+/$branch,v
+      svn_update($module, "$dir/$module/$branch", $revision);,V
+svn=`which svn`;svnc=`which svnc`;if [[ $svnc ]]; then    svn=$svnc;fipushd $HOME/Projects > /dev/null;chbranch -l | tail -n +2 | awk '{    if ($3 != "trunk")        $3 = "branches/"$3;    path = $1"/"$3;    print path;}' | xargs $svn "$@";if [ "$1" = "up" ]then    $svn "$@" -N deployelse    $svn "$@" deployfi$svn "$@" devtools/trunkpopd > /dev/null;,V
+cbranch -c web.conf,v
+chbranch ,v
+echo ""echo "chbranch is deprecated"echo ""echo "if you are trying to 'cbranch -c web.conf' try 'etsy-refresh' instead",V
+ ,v
+443,v
+    Listen 443    NameVirtualHost *:443,V
+) ? '443' : '80',v
+(,v
+ssl,v
+, 'port' => '443',v
+80,v
+, 'port' => '80',v
+666,v
+, 'port' => '666',v
+commands,v
+use ,v
+,,v
+#!/usr/bin/env python25# make sure the min version of python is being run.import sysmin_version = '2.5'if sys.version < min_version:   print 'chbranch not supported on python version < %s' % min_version   print 'check your PATH to make sure the correct python is first in your path'   sys.exit(1)from devtools import *if __name__ == "__main__":    bu = BranchUpdater()    bu.invokeCli(),V
+            $this->updateIndexShardFields();,V
+#asdf,V
+#,v
+#echo $path,V
+abs_path,v
+/trunk,v
+$server_config["web"]["homedir"] = "/var/www";,V
+platform, ,v
+asdf,V
+, 1,v
+    public function testDeleteObjectDataFromShard() {        $this->migrator->deleteObjectDataFromShard(1, EtsyConfig_ShardMigrate::$USER, 1);        $sql = "SELECT * FROM user_details WHERE user_id = 1";        $result = $this->fetchRowFromTargetShard($sql);        $this->assertTrue(!isset($result));     },V
+ *deleteObjectDataFromOldShard($object_id, $type),V
+shard 1,v
+ *   To delete a user id 25 and associated data from shard 1 *     $j = new Job('ShardMigrator', 'deleteObjectDataFromShard');  *     $j->runAsync(25, EtsyConfig_ShardMigrate::$USER, 1),V
+deleteObjectDataFromOldShard($object_id, $type),v
+        $index_obj->old_shard = $source_shard_id;,V
+$shard_id,v
+$index_obj->old_shard,v
+    $this->deleteObjectDataFromShard($object_id, $type, $shard_id);,V
+ {,v
+public function ,v
+    public function deleteObjectDataFromShard($object_id, $type, $shard_id) {        $this->setObjectId($object_id);        $this->setShardDataType($type);,V
+        $index_obj->$source_shard_field = $target_shard_id;,V
+        $index_obj = $this->getUncachedIndexObjectInstance();        $index_obj->$source_shard_field = $target_shard_id;        $index_obj->old_shard = $source_shard_id;,V
+     * @param $shard_id the numeric id of the target shard,V
+target specified,v
+    /**     * Delete an object's associated data from the target specified      *     * @param $object_id the id of the object being migrated (eg. the user id)     * @param $type the key into the shard data configuration (eg. EtsyConfig_ShardMigrate::$USER)     * @param $shard_id the numeric id of the target shard     */,V
+     * @param $percentage the percentage of the source shard to migrate,V
+     * @param $object_id the id of the object being migrated (eg. the user id),V
+getSourceDBConn,v
+echo date('r');,V
+<?,V
+storefronts,v
+  'storefronts' => 'mysql:host=devmysql01.ny4dev.etsy.com;port=3306;dbname=storefronts;user=etsy_rw;password=3tsywr1t3',V
+awsprod@etsy.com,v
+productions ,v
+Prod ,v
+etsyman,v
+&& !preg_match("/^(qa-)/", trim(`hostname -s`)),v
+if (preg_match("/^(qa-)/", trim(`hostname -s`))) {    $server_config["web"]["address"] = 'qa-www.ny4dev.etsy.com';},V
+subdomain ,v
+subdomain == 'www',v
+www,v
+subdomain,v
+@hostname,v
+  <% end %>,V
+  <% if subdomain == 'www' %>,V
+8,v
+2,v
+0.999004  2010-12-28,V
+y,v
+e,v

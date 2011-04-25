@@ -1,0 +1,59 @@
+#!/bin/bash
+set -e
+
+# script to rsync various raid folders to s3
+
+# my fstab has entries like:
+# thecus:/raid/data/katies_photos  /mnt/katies_photos nfs nfsvers=2,rsize=8192,wsize=8192,soft,auto
+# s3fs#goulah-katies-photos  /mnt/s3/goulah-katies-photos fuse allow_other,accessKeyId=key,secretAccessKey=secret,use_rrs=1 0 0
+
+# heres the bucket/directory info
+dirs[0]="katies-photos"
+dirs[1]="katiejanephotography"
+
+# for extra debug info
+debug=0
+
+# mountdir - mount directory if its not already mounted
+function mountdir {
+    dir=$1
+
+    if ( ! mountpoint -q $dir ); then
+        echo "attempting to mount $dir"
+        if ( ! sudo mount $dir ); then
+            echo "mount of $dir failed"
+            return 1
+        fi
+    fi
+
+    echo "$dir is mounted"
+    return 0
+}
+
+# main loop
+for dir in "${dirs[@]}"; do
+
+    bucket="goulah-$dir"
+    s3_mount="/mnt/s3/$bucket"
+    raid_dir="/mnt/${dir/-/_}"
+
+    if [ $debug == 1 ]; then
+        echo "bucket:   $bucket"
+        echo "s3 mount: $s3_mount"
+        echo "raid dir: $raid_dir"
+    fi
+
+    if ( ! mountdir $s3_mount ); then
+        continue;
+    fi
+
+    if ( ! mountdir $raid_dir ); then
+        continue;
+    fi
+
+    echo "rsync from $raid_dir to $s3_mount"
+    rsync -auv --delete $raid_dir/ $s3_mount/
+
+    echo ""
+done
+

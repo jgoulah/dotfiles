@@ -1,0 +1,11 @@
+#!/bin/bash
+
+hostname=`basename $0`
+
+# set hostname
+echo -n -e "\033k${hostname%%.*}\033\134"
+ssh -X $hostname $*
+
+# set hostname back when session is done (-s on osx)
+echo -n -e "\033k`hostname -s`\033\134"
+

@@ -1,0 +1,8 @@
+!#/bin/bash
+
+for i in `ls *.wav`
+ do
+  fname=`basename $i .wav`
+  lame -m s $i -o $fname.mp3
+ done
+

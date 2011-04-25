@@ -1,0 +1,18 @@
+# change all the static js stuff to use the new modifier
+find . -name '*tpl'  -exec grep -H '/static' {} \; | cut -d':' -f1 | xargs -n1 -I{} perl -pi -e "s|src=\"(/static.*\.js)\"|src=\"{'\$1'\|static_url}\"|g" {}
+
+
+# find all the files that use js
+find . -name '*tpl' | xargs egrep '<script ' | egrep '\.(js|css)' | cut -d':' -f2 | perl -ne "m|src=\"(.*)\"|; print qq{\$1\n};" | uniq
+
+
+# changes all /admin/js to /static/js
+grep -r '\/admin\/js' * | cut -d':' -f1 | uniq | xargs -n1 -I{} sed -i 's|/admin/js|/static/js|g' {}
+
+
+# remove auto_inc line
+sed 's/AUTO_INCREMENT=[0-9]*\b//' < database.dump > database_fixed.dump
+
+
+# get hostname from ip (knowing part of the domain)
+host $(ifconfig eth0 | grep "inet addr" | awk {'print $2'} | cut -f2 -d:) | awk {'print $NF'} | perl -ne "m|(.*).ny4dev.etsy.com|; print qq{\$1\n};"

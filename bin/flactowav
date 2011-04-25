@@ -1,0 +1,4 @@
+for i in `ls *.flac`
+do
+  flac --decode $i
+done

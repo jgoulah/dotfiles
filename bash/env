@@ -1,0 +1,36 @@
+
+PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+
+export HISTSIZE=5000          # Num. of commands in history stack in memory
+export HISTFILESIZE=5000      # Num. of commands in history FILE
+export HISTCONTROL=ignoreboth # bash < 3, omit dups & lines starting with space
+#export HISTIGNORE='&:[ ]*'# bash >= 3, omit dups & lines starting with space
+#export HISTTIMEFORMAT='%Y-%m-%d_%H:%M:%S_%Z=' # bash >= 3, time-stamp hist file
+shopt -s histappend           # Append rather than overwrite history on exit
+shopt -q -s cdspell           # Auto-fix minor typos in interactive use of 'cd'
+shopt -q -s checkwinsize      # Update the values of LINES and COLUMNS
+shopt -q -s cmdhist           # Make multi-line commands 1 line in history
+set -o notify # (or set -b)   # Immediate notification of bckgrnd job termintn.
+
+# prefer emacs cli (believe it or not)
+set -o emacs
+
+export PERL_MM_USE_DEFAULT=1
+export EDITOR=vim
+
+export TERM=xterm-256color
+
+export ETSY_ENVIRONMENT=development
+export SEARCH_SERVER_ENV=dev
+
+export PATH=/sbin:/usr/sbin:~/bin:/usr/local/bin
+export PATH=$PATH:/usr/local/postgresql-8.3/bin
+# for mac
+export PATH=$PATH:/opt/local/bin:/opt/local/sbin
+
+# Set up local perl environment
+eval `perl -I$HOME/perl5/lib/perl5 -Mlocal::lib`
+
+# private ec2 stuff
+source /etc/ec2_keys
+
