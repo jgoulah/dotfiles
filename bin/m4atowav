@@ -1,0 +1,7 @@
+#!/bin/bash
+
+for i in *.m4a; 
+ do 
+  out=$(ls $i | sed -e 's/.m4a//g'); 
+  mplayer -ao pcm "$i" -ao pcm:file=$out.wav; 
+ done;

@@ -1,0 +1,35 @@
+[user]
+    name = John Goulah 
+    email = jgoulah@etsy.com 
+[github]
+    user = jgoulah
+    token = token = !cat /etc/github_pass 
+[branch]
+    autosetupmerge = true
+[color]
+    ui = true
+[color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
+[color "diff"]
+    whitespace = red reverse
+    meta = yellow bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+[color "status"]
+    added = yellow
+    changed = green
+    untracked = cyan
+[alias]
+    st = status
+    ci = commit
+    br = branch
+    co = checkout
+    df = diff
+    lg = log -p
+    ap = add --patch
+	unstage = reset HEAD
+[apply]
+	whitespace = nowarn

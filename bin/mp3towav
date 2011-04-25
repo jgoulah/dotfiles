@@ -1,0 +1,5 @@
+for i in `ls *.mp3`
+do
+  fname=`basename $i .mp3`
+  mpg123 -s $i | sox -t raw -r 44100 -s -w -c 2 - $fname.wav
+done

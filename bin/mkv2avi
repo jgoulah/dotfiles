@@ -1,0 +1,18 @@
+#!/bin/sh
+
+# mkv2avi input.mkv output.avi
+ 
+INPUT=$1
+OUTPUT=$2
+ 
+mplayer "$INPUT" -ao pcm:fast:file=audio.wav -vc null -vo null
+mencoder "$INPUT" \
+    -ffourcc divx \
+    -ovc lavc -lavcopts vcodec=mpeg4:vhq:vbitrate=400 \
+    -audiofile audio.wav \
+    -oac mp3lame -lameopts vbr=3 \
+    -slang eng \
+    -sws 2 -vf scale=352:-3 \
+    -o "$OUTPUT"
+
+rm -f audio.wav

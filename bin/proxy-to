@@ -1,0 +1,27 @@
+#!/bin/sh
+
+# creates a .ssh/config entry, makes an ssh-to link
+# scp's over .ssh dir
+
+run_args="$0 <server>";
+
+server=$1
+if [ -z $server ]; then
+	echo $run_args;
+	exit
+fi
+
+echo "creating config..."
+echo "" >> .ssh/config
+echo "host $1" >> .ssh/config 
+echo "    hostname $1" >> .ssh/config
+echo "    user jgoulah" >> .ssh/config
+echo "    ProxyCommand ssh work exec nc %h %p" >> .ssh/config
+
+
+echo "creating ssh-to link..."
+ln -s ~/bin/ssh-to ~/bin/$server
+
+echo "scp'ing over .ssh dir (requires pass) ..."
+scp -r .ssh $server:
+

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+for i in *.ogg; do
+    oggdec "$i" -o - | lame --preset standard - "${i%ogg}mp3"
+done

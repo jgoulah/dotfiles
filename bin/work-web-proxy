@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# ssh into work machine then tunnell 8888 over to 80 on jgoulah5
+#ssh -N work -L 8888:jgoulah5:80
+
+sudo ssh -N jgoulah@work -L 80:jgoulah5:80 -f

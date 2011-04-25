@@ -1,0 +1,26 @@
+#!/bin/bash
+
+log_dir="/home/jgoulah/.irssi/logs"
+channels=( etsy sysops hardware coreplatform push apidev storefronts csquared support )
+date=`date '+%Y-%m-%d'`
+log_today="$date.log"
+title="irc channel logs for $date"
+
+links="$title\n\n"
+for channel in ${channels[@]} ; do 
+    links+="=============$channel==============\n"
+    links+=$(grep -P 'https?://' $log_dir/\#$channel/$log_today | perl -ne "m|<\s?(.*)>.*(https?://.*)\s|; print qq{\$2 - \$1\n};")
+    links+="\n\n"
+done
+
+output=""
+for channel in ${channels[@]} ; do 
+    output+="=============$channel==============\n"
+    output+=$(cat $log_dir/\#$channel/$log_today)
+    output+="\n\n\n"
+done
+
+output=$links+$output
+#echo -e "$output"
+
+echo -e "$output" | mail -s "$title" jgoulah@gmail.com
