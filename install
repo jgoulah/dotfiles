@@ -1,0 +1,19 @@
+#!/bin/bash
+
+files=( .vimrc .vim )
+
+# backup old stuff
+for file in "${files[@]}"; do
+    echo "installing $file"
+    if [ -e ~/$file ]; then
+        echo "$file exists"
+        mv ~/$file ~/$file.$$.bak
+    elif [ -h ~/$file ]; then
+        echo "symlink $file exists"
+        rm -f ~/$file
+    fi
+done
+
+cur=$(pwd)
+ln -s $cur/vimrc ~/.vimrc
+ln -s $cur/dotvim ~/.vim 
