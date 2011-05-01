@@ -1,6 +1,11 @@
 
 PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 
+export PATH=/sbin:/usr/sbin:~/bin:/usr/local/bin:/usr/bin:/bin
+export PATH=$PATH:/usr/local/postgresql-8.3/bin
+# for mac
+export PATH=$PATH:/opt/local/bin:/opt/local/sbin
+
 export HISTSIZE=5000          # Num. of commands in history stack in memory
 export HISTFILESIZE=5000      # Num. of commands in history FILE
 export HISTCONTROL=ignoreboth # bash < 3, omit dups & lines starting with space
@@ -22,11 +27,6 @@ export TERM=xterm-256color
 
 export ETSY_ENVIRONMENT=development
 export SEARCH_SERVER_ENV=dev
-
-export PATH=/sbin:/usr/sbin:~/bin:/usr/local/bin
-export PATH=$PATH:/usr/local/postgresql-8.3/bin
-# for mac
-export PATH=$PATH:/opt/local/bin:/opt/local/sbin
 
 # Set up local perl environment
 eval `perl -I$HOME/perl5/lib/perl5 -Mlocal::lib`

@@ -1,8 +1,15 @@
 #!/bin/bash
 
-files=( .vimrc .vim .gitconfig .bashrc .bash .irbrc .ackrc .screenrc bin )
+function makelink {
+    target=$1
+    link_name=$2
 
-# backup old stuff
+    echo "installing $target to $link_name"
+    ln -s $target $link_name 
+}
+
+#backup old stuff
+files=( .vimrc .vim .gitconfig .bashrc .bash .irbrc .ackrc .screenrc bin )
 for file in "${files[@]}"; do
     if [ -e ~/$file ]; then
         echo "$file exists"
@@ -13,13 +20,25 @@ for file in "${files[@]}"; do
     fi
 done
 
-cur=$(dirname $0)
-ln -s $cur/vimrc ~/.vimrc
-ln -s $cur/dotvim ~/.vim 
-ln -s $cur/gitconfig ~/.gitconfig
-ln -s $cur/bashrc ~/.bashrc
-ln -s $cur/bash ~/.bash
-ln -s $cur/irbrc ~/.irbrc
-ln -s $cur/ackrc ~/.ackrc
-ln -s $cur/screenrc ~/.screenrc
-ln -s $cur/bin ~/bin
+cur=$(dirname "$(readlink -f $0)")
+
+makelink $cur/vimrc    ~/.vimrc
+makelink $cur/dotvim   ~/.vim 
+makelink $cur/bashrc   ~/.bashrc
+makelink $cur/bash     ~/.bash
+makelink $cur/irbrc    ~/.irbrc
+makelink $cur/ackrc    ~/.ackrc
+makelink $cur/screenrc ~/.screenrc
+makelink $cur/bin      ~/bin
+
+#github config
+github_token='/etc/github_pass'
+if [ -f $github_token ]; then
+    token=$(cat $github_token)
+    sed "s/__GITHUB_TOKEN__/$token/" < $cur/gitconfig.tmpl > $cur/gitconfig 
+    makelink $cur/gitconfig ~/.gitconfig
+else 
+    echo "install $github_token for gitconfig" 
+fi
+
+
