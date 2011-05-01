@@ -1,10 +1,9 @@
 #!/bin/bash
 
-files=( .vimrc .vim )
+files=( .vimrc .vim .gitconfig .bashrc .bash .irbrc .ackrc .screenrc bin )
 
 # backup old stuff
 for file in "${files[@]}"; do
-    echo "installing $file"
     if [ -e ~/$file ]; then
         echo "$file exists"
         mv ~/$file ~/$file.$$.bak
@@ -14,6 +13,13 @@ for file in "${files[@]}"; do
     fi
 done
 
-cur=$(pwd)
+cur=$(dirname $0)
 ln -s $cur/vimrc ~/.vimrc
 ln -s $cur/dotvim ~/.vim 
+ln -s $cur/gitconfig ~/.gitconfig
+ln -s $cur/bashrc ~/.bashrc
+ln -s $cur/bash ~/.bash
+ln -s $cur/irbrc ~/.irbrc
+ln -s $cur/ackrc ~/.ackrc
+ln -s $cur/screenrc ~/.screenrc
+ln -s $cur/bin ~/bin
