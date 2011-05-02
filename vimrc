@@ -161,11 +161,12 @@ import os
 import vim
 
 tags = ''
-tagpath = "%s/%s" % (os.environ['HOME'], '.vim/tags')
+tagpath = "%s/%s" % (os.environ['HOME'], '.vimtags')
 
-for file in os.listdir(tagpath):
-    if (file != 'README'):
-        tags += "%s/%s," % (tagpath, file)
+if (os.path.exists(tagpath)):
+    for file in os.listdir(tagpath):
+        if (file != 'README'):
+            tags += "%s/%s," % (tagpath, file)
 
 cmdsettags = "set tags=%s" % tags
 vim.command(cmdsettags)
