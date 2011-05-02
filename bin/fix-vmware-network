@@ -1,0 +1,3 @@
+#!/bin/sh
+# restarts vmware networking
+sudo /Library/Application\ Support/VMware\ Fusion/boot.sh --restart
