@@ -36,6 +36,7 @@ set winwidth=300
 set winminwidth=50
 set tabpagemax=80
 set showcmd " show partial commands in status line and selected characters/lines in visual mode
+set autoread " Set to auto read when a file is changed from the outside
 
 " search options
 set nohls " hlsearch if want highlighting
@@ -82,6 +83,10 @@ map <S-l> gt
 map <C-h> gT
 map <C-l> gt
 nmap <S-t> :tabnew<CR>
+map <leader>tn :tabnew<cr>
+map <leader>te :tabedit
+map <leader>tc :tabclose<cr>
+map <leader>tm :tabmove
 
 " shift + tab to un-indent
 imap <S-Tab> <C-o><<
