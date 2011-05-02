@@ -32,5 +32,7 @@ export SEARCH_SERVER_ENV=dev
 eval `perl -I$HOME/perl5/lib/perl5 -Mlocal::lib`
 
 # private ec2 stuff
-source /etc/ec2_keys
+if [ -f /etc/ec2_keys ]; then
+    source /etc/ec2_keys
+fi
 

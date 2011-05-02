@@ -8,6 +8,11 @@ function makelink {
     ln -s $target $link_name 
 }
 
+# since readlink -f doesn't work in osx
+function abspath() {
+    [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
+}
+
 #backup old stuff
 files=( .vimrc .vim .gitconfig .bashrc .bash .irbrc .ackrc .screenrc bin )
 for file in "${files[@]}"; do
@@ -20,7 +25,7 @@ for file in "${files[@]}"; do
     fi
 done
 
-cur=$(dirname "$(readlink -f $0)")
+cur=$(dirname "$(abspath $0)")
 
 makelink $cur/vimrc    ~/.vimrc
 makelink $cur/dotvim   ~/.vim 
@@ -40,5 +45,4 @@ if [ -f $github_token ]; then
 else 
     echo "install $github_token for gitconfig" 
 fi
-
 
