@@ -1,0 +1,25 @@
+#!/bin/bash
+cd ~/p
+
+for i in site ; do 
+    echo "tagging $i"
+    pushd $i 
+    ctags -f ~/.vimtags/$i \
+    --langmap="php:+.inc" -h ".php.inc" -R \
+    --links=no \
+    --exclude='*.js' \
+    --exclude='*.sql' \
+    --exclude='*.py' \
+    --exclude='.git' \
+    --totals=yes \
+    --tag-relative=yes \
+    --PHP-kinds=+cfdv \
+    --regex-PHP='/abstract\s+class\s+([^ ]+)/\1/c/' \
+    --regex-PHP='/interface\s+([^ ]+)/\1/c/' \
+    --regex-PHP='/const\s+([^ ]+)/\1/c/' \
+    --regex-PHP='/(private\s+|static\s+|public\s+|protected\s+)\$([^ ]+)/\2/c/' \
+    --regex-PHP='/(public\s+|static\s+|abstract\s+|protected\s+|private\s+)function\s+\&?\s*([^ (]+)/\2/f/'
+    popd
+
+done;
+

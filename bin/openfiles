@@ -1,0 +1,3 @@
+#!/bin/sh
+
+ack -il "$1" * |  tr '\n' ' ' | xargs vim -p

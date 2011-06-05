@@ -1,2 +1,4 @@
 tags/phpunit
 tags/site
+tmp
+tmp/*
