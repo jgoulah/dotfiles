@@ -13,8 +13,11 @@ function abspath() {
     [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
 }
 
+#make sure we have oh-my-zsh
+wget --no-check-certificate https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
+
 #backup old stuff
-files=( .vimrc .vim .gitconfig .bashrc .bash .irbrc .ackrc .screenrc bin )
+files=( .vimrc .vim .gitconfig .bashrc .bash .irbrc .ackrc .screenrc bin .zshrc )
 for file in "${files[@]}"; do
     if [ -e ~/$file ]; then
         echo "$file exists"
@@ -35,6 +38,7 @@ makelink $cur/irbrc    ~/.irbrc
 makelink $cur/ackrc    ~/.ackrc
 makelink $cur/screenrc ~/.screenrc
 makelink $cur/bin      ~/bin
+makelink $cur/zshrc    ~/.zshrc
 
 #github config
 github_token='/etc/github_pass'
