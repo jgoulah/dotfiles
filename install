@@ -41,12 +41,15 @@ makelink $cur/bin      ~/bin
 makelink $cur/zshrc    ~/.zshrc
 
 #github config
-github_token='/etc/github_pass'
-if [ -f $github_token ]; then
-    token=$(cat $github_token)
-    sed "s/__GITHUB_TOKEN__/$token/" < $cur/gitconfig.tmpl > $cur/gitconfig 
-    makelink $cur/gitconfig ~/.gitconfig
-else 
-    echo "install $github_token for gitconfig" 
-fi
-
+gitpass=( ~/.github_pass /etc/github_pass )
+for file in "${gitpass[@]}"; do
+    if [ -f $file ]; then
+        echo "using $file"
+        token=$(cat $file)
+        sed "s/__GITHUB_TOKEN__/$token/" < $cur/gitconfig.tmpl > $cur/gitconfig
+        makelink $cur/gitconfig ~/.gitconfig
+        break
+    else
+        echo "skipping $file"
+    fi
+done

@@ -36,3 +36,7 @@ if [ -f /etc/ec2_keys ]; then
     source /etc/ec2_keys
 fi
 
+# work stuff
+if [ -f /etc/profile.d/etsy.sh ]; then
+    source /etc/profile.d/etsy.sh
+fi

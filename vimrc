@@ -71,8 +71,8 @@ vmap  o  :call NERDComment(1, 'toggle')<CR>
 vmap  O  :call NERDComment(1, 'toggle')<CR>
 
 " yankring history
-"silent execute '!mkdir -p $HOME/.vim/tmp/yankring'
-"let g:yankring_history_dir = '$HOME/.vim/tmp/yankring'
+silent execute '!mkdir -p $HOME/.vim/tmp/yankring'
+let g:yankring_history_dir = '$HOME/.vim/tmp/yankring'
 
 " open tag in new window
 map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
@@ -154,17 +154,19 @@ nnoremap <S-F6> <C-W>W
 set pastetoggle=<F12> 
 
 " function to loop through a specified path and include each tag file
+if has('python')
 function! BuildTagsFromPath()
 python << EOF
 import os
 import vim
 
 tags = ''
-tagpath = "%s/%s" % (os.environ['HOME'], '.vim/tags')
+tagpath = "%s/%s" % (os.environ['HOME'], '.vimtags')
 
-for file in os.listdir(tagpath):
-    if (file != 'README'):
-        tags += "%s/%s," % (tagpath, file)
+if (os.path.exists(tagpath)):
+    for file in os.listdir(tagpath):
+        if (file != 'README'):
+            tags += "%s/%s," % (tagpath, file)
 
 cmdsettags = "set tags=%s" % tags
 vim.command(cmdsettags)
@@ -172,3 +174,4 @@ EOF
 endfunction
 
 call BuildTagsFromPath()
+endif

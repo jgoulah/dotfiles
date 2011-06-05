@@ -27,3 +27,7 @@ alias dbur='ETSY_DBUNIT_RELOAD=1 ETSY_ENVIRONMENT=testing ETSY_DBUNIT=1 phpunit 
 
 # knife-dev 
 function knife-dev() { /usr/bin/knife $@ -c ~/.chef/knifedev.rb ;}
+
+# minicpanm
+alias minicpanm='cpanm --mirror http://devdb:25123 --mirror-only'
+alias mcp='minicpanm'
