@@ -6,8 +6,14 @@ export ZSH=$HOME/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 #export ZSH_THEME="jispwoso"
-export ZSH_THEME="miloshadzic"
 #export ZSH_THEME="macovsky"
+#export ZSH_THEME="miloshadzic"
+#export ZSH_THEME="gozilla"
+#export ZSH_THEME="bira"
+#export ZSH_THEME="steeef"
+#export ZSH_THEME="tonotdo"
+export ZSH_THEME="kphoen"
+
 
 
 # Set to this to use case-sensitive completion
@@ -29,4 +35,4 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=/home/jgoulah/bin:/home/jgoulah/perl5/bin:/sbin:/usr/sbin:/home/jgoulah/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/postgresql-8.3/bin:/opt/local/bin:/opt/local/sbin:/opt/ec2/bin
+export PATH=/home/jgoulah/bin:/home/jgoulah/perl5/bin:/sbin:/usr/sbin:/usr/local/bin:/usr/bin:/bin:/usr/local/postgresql-8.3/bin:/opt/local/bin:/opt/local/sbin:/opt/ec2/bin
