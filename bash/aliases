@@ -16,6 +16,10 @@ alias gist='nopaste --private --service Gist'
 alias gist-pub='nopaste --service Gist'
 alias git-log-graph='git log --oneline --graph --decorate'
 alias git-word-diff='git diff --word-diff'
+alias g='git'
+
+alias find-big-files='/usr/bin/find . -type f -size +50000k -exec /bin/ls -lh {} \; | /usr/bin/awk '\''{ print $9 ": " $5 }'\'''
+alias dump-top-selects='ngrep -qd any -n 10000 -s 1500 -W byline . dst port 3306 | grep SELECT | sort | uniq -c | sort -n | tail'
 
 # curl + stats
 alias curltime='curl -o /dev/null -s -w '\''Return Code = %{http_code}\nBytes recieved = %{size_download}\nDNS = %{time_namelookup}\nConnect = %{time_connect} \nPretransfer = %{time_pretransfer}\nStart transfer = %{time_starttransfer}\nTotal = %{time_total}\n'\'''
