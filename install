@@ -17,7 +17,7 @@ function abspath() {
 wget --no-check-certificate https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
 
 #backup old stuff
-files=( .vimrc .vim .gitconfig .bashrc .bash .irbrc .ackrc .screenrc bin .zshrc .oh-my-zsh/custom/aliases.zsh )
+files=( .vimrc .vim .gitconfig .bashrc .bash .irbrc .ackrc .screenrc bin .zshrc .oh-my-zsh/custom/aliases.zsh .oh-my-zsh/custom/env.zsh )
 for file in "${files[@]}"; do
     if [ -e ~/$file ]; then
         echo "$file exists"
@@ -40,6 +40,7 @@ makelink $cur/screenrc ~/.screenrc
 makelink $cur/bin      ~/bin
 makelink $cur/zshrc    ~/.zshrc
 makelink $cur/zsh/aliases.zsh ~/.oh-my-zsh/custom/ 
+makelink $cur/zsh/env.zsh ~/.oh-my-zsh/custom/ 
 
 #github config
 gitpass=( ~/.github_pass /etc/github_pass )
