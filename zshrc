@@ -35,4 +35,3 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=/home/jgoulah/bin:/home/jgoulah/perl5/bin:/sbin:/usr/sbin:/usr/local/bin:/usr/bin:/bin:/usr/local/postgresql-8.3/bin:/opt/local/bin:/opt/local/sbin:/opt/ec2/bin
