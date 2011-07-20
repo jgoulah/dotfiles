@@ -16,9 +16,10 @@ export ETSY_ENVIRONMENT=development
 export SEARCH_SERVER_ENV=dev
 
 # Set up local perl environment
-if [ -f $HOME/perl5 ]; then
-  eval `perl -I$HOME/perl5/lib/perl5 -Mlocal::lib`
-fi
+[[ -d "$HOME/perl5/lib/perl5" ]] && eval `perl -I$HOME/perl5/lib/perl5 -Mlocal::lib`
+
+# Set up rvm
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 
 # private ec2 stuff
 if [ -f /etc/ec2_keys ]; then
