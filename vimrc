@@ -142,6 +142,7 @@ inoremap <silent> <F3> <ESC>:YRShow<cr>
 
 " toggle nerd tree with <F2>
 map <F2> :NERDTreeToggle<CR>
+map <F3> :TlistToggle<CR>
 
 " ,w to open a split window and switch to it
 nnoremap <leader>w <C-w>v<C-w>l
