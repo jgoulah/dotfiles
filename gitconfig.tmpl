@@ -28,8 +28,12 @@
     br = branch
     co = checkout
     df = diff
-    lg = log -p
+    l = log --graph --decorate
+    lg = log --decorate -p
     ap = add --patch
 	unstage = reset HEAD
 [apply]
 	whitespace = nowarn
+[gist]
+	private = yes
+	extension = markdown
