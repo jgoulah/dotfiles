@@ -4,6 +4,9 @@ export PATH=$PATH:/usr/local/postgresql-8.3/bin
 # for mac
 export PATH=$PATH:"/Library/Application Support/VMware Fusion"
 
+# default node path
+export NODE_PATH=/usr/local/lib/node_modules
+
 # prefer emacs cli (believe it or not)
 set -o emacs
 
