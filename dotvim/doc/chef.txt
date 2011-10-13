@@ -1,0 +1,281 @@
+*chef.txt*	plugin for opscode's chef. find attribute, open recipes etc.
+
+                   ______   __               ____
+                  / ____/  / /_     ___     / __/
+                 / /      / __ `   / _ `   / /_
+                / /___   / / / /  /  __/  / __/
+                `____/  /_/ /_/   `___/  /_/
+                          - easy jump to target!!
+
+Version: 1.0
+Author : t9md <taqumd@gmail.com>
+==============================================================================
+
+CONTENTS					*chef-contents*
+
+Introduction					|chef-introduction|
+Commands					|chef-commands|
+Usage						|chef-usage|
+Finder						|chef-finder|
+Hook						|chef-hook|
+Configuration					|chef-config|
+Variables					|chef-variables|
+Notes						|chef-notes|
+ToDo						|chef-todo|
+Changelog					|chef-changelog|
+
+==============================================================================
+INTRODUCTION					*chef-introduction*
+
+chef.vim is plugin which make it easy for
+
+  * jump between `attributes` and `recipes`
+  * open `recipes` by extract filename from `include_recipe`
+  * open `templates` and `files`
+  * jump to `attributes` file
+
+Latest Version:
+https://github.com/t9md/vim-chef
+
+
+==============================================================================
+COMMANDS						*chef-commands*
+
+* [Deprecated] ChefDoWhatIMean
+* [Deprecated] ChefDoWhatIMeanSplit
+* [Deprecated] ChefDoWhatIMeanVsplit
+
+:ChefFindAny                                                     *:ChefFindAny*
+:ChefFindAnySplit                                           *:ChefFindAnySplit*
+:ChefFindAnyVsplit                                         *:ChefFindAnyVsplit*
+
+Find target in appropriate order.
+You can customize order and targets by |configuration|.
+
+:ChefFindAttribute                                         *:ChefFindAttribute*
+:ChefFindAttributeSplit                               *:ChefFindAttributeSplit*
+:ChefFindAttributeVsplit                             *:ChefFindAttributeVsplit*
+
+:ChefFindRecipe                                               *:ChefFindRecipe*
+:ChefFindRecipeSplit                                     *:ChefFindRecipeSplit*
+:ChefFindRecipeVsplit                                   *:ChefFindRecipeVsplit*
+
+:ChefFindDefinition                                       *:ChefFindDefinition*
+:ChefFindDefinitionSplit                             *:ChefFindDefinitionSplit*
+:ChefFindDefinitionVsplit                           *:ChefFindDefinitionVsplit*
+
+:ChefFindLWRP                                                   *:ChefFindLWRP*
+:ChefFindLWRPSplit                                         *:ChefFindLWRPSplit*
+:ChefFindLWRPVSplit                                       *:ChefFindLWRPVSplit*
+
+:ChefFindSource                                               *:ChefFindSource*
+:ChefFindSourceSplit                                     *:ChefFindSourceSplit*
+:ChefFindSourceVsplit                                   *:ChefFindSourceVsplit*
+
+:ChefFindRelated                                             *:ChefFindRelated*
+:ChefFindRelatedSplit                                   *:ChefFindRelatedSplit*
+:ChefFindRelatedVsplit                                 *:ChefFindRelatedVsplit*
+
+==============================================================================
+USAGE							*chef-usage*
+
+in following examples, assume~
+
+* `<M-a>` is mapped to |:ChefFindAny|
+* `^` indicate cursor position
+
+## jump to node's attribute~
+>
+  node[:apache2][:address] = node[:nova][:my_ip]
+  ^^^^^^^^^^^^^^^^^^^^^^^
+<
+`<M-a>` try to find that attribute appropriate order.
+
+## open templates~
+open in `recipes/default.rb' then position cursor to
+>
+  source "grants.sql.erb"
+          ^^^^^^^^^^^^^^
+<
+`<M-a>`, try to open file under `templates/default/grants.sql.erb`
+
+## open files~
+>
+  source "grants.sql"
+          ^^^^^^^^^^^^^^
+<
+`<M-a>` try to open file under `files/default/grants.sql`
+
+## jump between attributes and recipes~
+
+in buffer for file under `recipes/*` or `attributes/*`
+Press `<M-a>` to jump *related* files.
+For examples, jump between `recipes/default.rb` and `attributes/default.rb`
+Jump between `resources/hoge.rb` and `providers/hoge.rb` is also supported.
+
+## open recipe files~
+>
+  include_recipe "nova::mysql"
+                  ^^^^^^^^^^
+<
+`<M-a>` try to open `cookbooks/nova/recipes/mysql.rb`
+
+## jump to definition
+
+>
+  apache_module "authz_groupfile"
+  ^^^^^^^^^^^^^
+<
+
+apache_module is definition. so `<M-a>` would find and jump to position where 
+defined.
+When apache_module is LWRP, chef.vim can jump to `apache/providers/module.rb`
+
+==============================================================================
+FINDEER								*chef-finder*
+
+Customize Finding target and finding order~
+
+You can customize what you want to find in `ChefFindAny` command.
+Following are default finder list.
+`ChefFindAny` try to find target in this order.
+>
+  [ "Attribute", "Source", "Recipe", "Definition", "LWRP", "Related" ]
+<
+If you want to exclude `Related` finder from target, set following in your `.vimrc`
+>
+  let g:chef = {}
+  let g:chef.any_finders = [ "Attribute", "Source", "Recipe", "Definition", "LWRP" ]
+<
+It's OK to remove Finder from list, but I don't recommend changing *order*.
+
+==============================================================================
+HOOK								*chef-hook*
+
+Hook after finding success [experimental]~
+
+After each finder success finding(return 1)
+Hook function is called if hook is defined.
+Hook take one argument 'env'.
+See "Configuration Example".
+
+==============================================================================
+CONFIGURATION						*chef-config*
+
+Requirement~
+>
+    au BufNewFile,BufRead */*cookbooks/*  call s:SetupChef()
+<
+
+Basic~
+>
+    function! s:SetupChef()
+        " Mouse:
+        " Left mouse click to GO!
+        nnoremap <buffer> <silent> <2-LeftMouse> :<C-u>ChefFindAny<CR>
+        " Right mouse click to Back!
+        nnoremap <buffer> <silent> <RightMouse> <C-o>
+
+        " Keyboard:
+        nnoremap <buffer> <silent> <M-a>      :<C-u>ChefFindAny<CR>
+        nnoremap <buffer> <silent> <M-f>      :<C-u>ChefFindAnySplit<CR>
+    endfunction
+<
+
+Advanced~
+>
+    function! ChefNerdTreeFind(env)
+        try
+            :NERDTreeFind
+            let scrolloff_orig = &scrolloff
+            let &scrolloff = 15
+            normal! jk
+            wincmd p
+        finally
+            let &scrolloff = scrolloff_orig
+        endtry
+    endfunction
+
+    let g:chef = {}
+    let g:chef.hooks = ['ChefNerdTreeFind']
+
+    " remove 'Related' from default, I want to find 'Related' explicitly.
+    let g:chef.any_finders = ['Attribute', 'Source', 'Recipe', 'Definition']
+
+    function! s:SetupChef()
+        " Mouse:
+        " Left mouse click to GO!
+        nnoremap <buffer> <silent> <2-LeftMouse> :<C-u>ChefFindAny<CR>
+        " Right mouse click to Back!
+        nnoremap <buffer> <silent> <RightMouse> <C-o>
+
+        " Keyboard:
+        nnoremap <buffer> <silent> <M-a>      :<C-u>ChefFindAny<CR>
+        nnoremap <buffer> <silent> <M-f>      :<C-u>ChefFindAnySplit<CR>
+        nnoremap <buffer> <silent> <M-r>      :<C-u>ChefFindRelated<CR>
+    endfunction
+<
+
+==============================================================================
+VARIABLES						 *chef-variables*
+
+g:chef = <Dictonary>
+	This dictionary is used as placeholder for other configuration.
+
+	Default~
+	{}
+
+g:chef.any_finders = <List>
+	Finders |List| which is used for |ChefFindAny|.
+
+        Default~
+        [ "Attribute", "Source", "Recipe", "Definition", "Related" ]
+
+
+g:chef.hooks = <List>
+	List of|Function|names, which is called when finding was successfully
+        completed.
+
+        Default~
+        []
+
+==============================================================================
+NOTES								*chef-notes*
+
+chef.vim doesn't provide `DEFAULT_KEY_MAPPING` like many other plugins do.
+So check |chef-config| section and set keymap you like. 
+
+chef.vim asume directory name end with '*cookbooks' as cookbooks root
+directory.
+>
+    ex) site_cookbooks, cookbooks
+<
+==============================================================================
+TODO							*chef-todo*
+
+==============================================================================
+CHANGELOG						*chef-changelog*
+2011-08-13: v1.0
+        - new finder LWRP.
+        - jump between resources and providers are introduced.
+2011-08-11:
+	- improve attribute finder
+2011-06-15: v0.9
+	- now able to find attribute whichever a[:attr] or a['attr']
+	- bugfix for search order of attribute
+	- search all attribute files under /attribute/ directory.
+2011-06-14: v0.8
+	- Deprecated `ChefDoWhatIMean` for naming consistency.
+	- Now use `ChefFindAny` for this purpose
+	- Provide new command for each Finder.
+	- Now order and targets to for `ChefFindAny` is customizable.
+	- Support definition finding.
+	- Improve debug capability and code consistency.
+	- Suport hook function.
+	- Improve finders information with color highlighted messages.
+2011-06-12: v0.6
+	- Make more fuzzy for attribute finding.
+2011-06-12: v0.5
+	- First release
+==============================================================================
+vim:tw=78:ts=8:ft=help:norl:
