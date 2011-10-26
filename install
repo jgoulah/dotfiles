@@ -61,4 +61,4 @@ for file in "${gitpass[@]}"; do
     fi
 done
 
-touch .dotfiles-installed
+touch ~/.dotfiles-installed
