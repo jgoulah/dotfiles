@@ -4,8 +4,8 @@ function makelink {
     target=$1
     link_name=$2
 
-    echo "installing $target to $link_name"
-    ln -s $target $link_name 
+    echo "linking $target to $link_name"
+    ln -nfs $target $link_name 
 }
 
 # since readlink -f doesn't work in osx
@@ -15,17 +15,16 @@ function abspath() {
 
 #make sure we have oh-my-zsh
 export GIT_SSL_NO_VERIFY=true
-wget --no-check-certificate https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
+if [ ! -d ~/.oh-my-zsh ]; then
+  wget --no-check-certificate https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
+fi
 
 #backup old stuff
 files=( .vimrc .vim .gitconfig .bashrc .bash .irbrc .ackrc .screenrc bin .zshrc .oh-my-zsh/custom/aliases.zsh .oh-my-zsh/custom/env.zsh )
 for file in "${files[@]}"; do
-    if [ -e ~/$file ]; then
+    if [ -e ~/$file ] && [ ! -h ~/$file ]; then
         echo "$file exists"
         mv ~/$file ~/$file.$$.bak
-    elif [ -h ~/$file ]; then
-        echo "symlink $file exists"
-        rm -f ~/$file
     fi
 done
 
@@ -43,6 +42,11 @@ makelink $cur/zshrc    ~/.zshrc
 makelink $cur/zsh/aliases.zsh ~/.oh-my-zsh/custom/ 
 makelink $cur/zsh/env.zsh ~/.oh-my-zsh/custom/ 
 
+#only if ssh dir isn't already there...
+if [ ! -d ~/.ssh ]; then
+    makelink $cur/ssh    ~/.ssh
+fi
+
 #github config
 gitpass=( ~/.github_pass /etc/github_pass )
 for file in "${gitpass[@]}"; do
@@ -56,3 +60,5 @@ for file in "${gitpass[@]}"; do
         echo "skipping $file"
     fi
 done
+
+touch .dotfiles-installed
