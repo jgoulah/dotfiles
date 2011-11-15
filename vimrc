@@ -43,6 +43,7 @@ set nohls " hlsearch if want highlighting
 set incsearch
 set ignorecase
 set smartcase
+set nu
 
 " wipe out highlights if using hlsearch
 nnoremap <leader><space> :noh<cr>
@@ -99,7 +100,24 @@ vmap <leader>b :<C-U>!svn blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'
 vmap <leader>g :<C-U>!git blame <C-R>=expand("%:p") <CR> \| sed -n <C-R>=line("'<") <CR>,<C-R>=line("'>") <CR>p <CR>
 
 " strip trailing whitespace
-nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+"nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+function! <SID>StripTrailingWhitespace()
+    " Preparation: save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " Do the business:
+    %s/\s\+$//e
+    " Clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
+endfunction
+nmap <silent> <Leader><space> :call <SID>StripTrailingWhitespace()<CR>
+
+" end of line markers
+autocmd InsertEnter * syn clear EOLWS | syn match EOLWS excludenl /\s\+\%#\@!$/
+autocmd InsertLeave * syn clear EOLWS | syn match EOLWS excludenl /\s\+$/
+highlight EOLWS ctermbg=red guibg=red
 
 " Yank from the cursor to the end of the line, to be consistent with C and D
 nnoremap Y y$
