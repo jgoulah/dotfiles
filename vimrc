@@ -197,3 +197,6 @@ endfunction
 
 call BuildTagsFromPath()
 endif
+
+" ctags force multiple match list
+noremap  <C-]>  g<C-]>
