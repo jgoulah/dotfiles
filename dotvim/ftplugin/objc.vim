@@ -5,5 +5,5 @@ highlight clear EOLWS
 " obj-c stuff (also objc in dotvim/ftplugin/objc.vim)
 map <leader>s :A<CR>
 map <leader>l :ListMethods<CR>
-map <leader>d :CocoaDoc 
+map <leader>d :exec("CocoaDoc ".expand("<cword>"))<CR>
 let tlist_objc_settings    = 'objc;i:interface;c:class;m:method;p:property'
