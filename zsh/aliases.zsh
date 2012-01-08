@@ -30,4 +30,4 @@ alias subpull='git submodule foreach git pull'
 alias subup='subpull'
 
 # dump the query and other interesting bits from a tcpdump
-function mshark() { /usr/local/bin/tshark -d tcp.port==3306,mysql -T fields -R mysql.query -e frame.time -e ip.src -e ip.dst -e mysql.query -r $1 ;}
+function mshark() { tshark -d tcp.port==3306,mysql -T fields -R mysql.query -e frame.time -e ip.src -e ip.dst -e mysql.query -r $1 ;}
