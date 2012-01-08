@@ -28,3 +28,9 @@ export SEARCH_SERVER_ENV=dev
 if [ -f /etc/ec2_keys ]; then
     source /etc/ec2_keys
 fi
+
+# z
+. $HOME/bin/z.sh
+function precmd () {
+  _z --add "$(pwd -P)"
+}
