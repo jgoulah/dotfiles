@@ -74,6 +74,7 @@ vmap  O  :call NERDComment(1, 'toggle')<CR>
 " yankring history
 silent execute '!mkdir -p $HOME/.vim/tmp/yankring'
 let g:yankring_history_dir = '$HOME/.vim/tmp/yankring'
+let g:yankring_manage_numbered_reg = 1
 
 " open tag in new window
 map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
@@ -158,8 +159,8 @@ vnoremap <F1> <ESC>
 nnoremap ; :
 
 " list all previously yanked text with <F3>
-nnoremap <silent> <F3> :YRShow<cr>
-inoremap <silent> <F3> <ESC>:YRShow<cr>
+nnoremap <silent> <F5> :YRShow<cr>
+inoremap <silent> <F5> n_url<ESC>:YRShow<cr>
 
 " toggle nerd tree with <F2>
 map <F2> :NERDTreeToggle<CR>

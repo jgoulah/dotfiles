@@ -5,11 +5,12 @@ set -e
 
 # my fstab has entries like:
 # thecus:/raid/data/katies_photos  /mnt/katies_photos nfs nfsvers=2,rsize=8192,wsize=8192,soft,auto
-# s3fs#goulah-katies-photos  /mnt/s3/goulah-katies-photos fuse allow_other,accessKeyId=key,secretAccessKey=secret,use_rrs=1 0 0
+# s3fs#kj-katies-photos  /mnt/s3/goulah-katies-photos fuse allow_other,accessKeyId=key,secretAccessKey=secret,use_rrs=1 0 0
 
 # heres the bucket/directory info
 dirs[0]="katies-photos"
 dirs[1]="katiejanephotography"
+dirs[2]="backups"
 
 # for extra debug info
 debug=0
@@ -52,7 +53,10 @@ for dir in "${dirs[@]}"; do
     fi
 
     echo "rsync from $raid_dir to $s3_mount"
-    rsync -auv --delete $raid_dir/ $s3_mount/
+
+    if ( ! rsync -auv $raid_dir/ $s3_mount/ ); then
+        continue;
+    fi
 
     echo ""
 done
