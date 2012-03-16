@@ -1,11 +1,32 @@
 #!/bin/bash
+#
+# INSTALLATION
+#   normally just: ./install
+#   or to put files into chef:
+#   NO_BACKUP=true ./install ~/dev/chef/cookbooks/homedirs/files/default/jgoulah
+#
+installdir=~
+home_install=true
+if [ -n "$1" ]; then
+  installdir=$1
+  home_install=false
+fi
 
 function makelink {
     target=$1
     link_name=$2
 
-    echo "linking $target to $link_name"
-    ln -nfs $target $link_name 
+    if [ $home_install == "true" ]; then
+      echo "linking $target to $link_name"
+      ln -nfs $target $link_name
+    else
+      echo "copying $target to $link_name"
+      if [ -d $target ]; then
+        target="$target/"
+        link_name="$link_name/"
+      fi
+      rsync -auv $target $link_name
+    fi
 }
 
 # since readlink -f doesn't work in osx
@@ -20,31 +41,33 @@ if [ ! -d ~/.oh-my-zsh ]; then
 fi
 
 #backup old stuff
-files=( .vimrc .vim .gitconfig .bashrc .bash .irbrc .ackrc .screenrc bin .zshrc .oh-my-zsh/custom/aliases.zsh .oh-my-zsh/custom/env.zsh )
-for file in "${files[@]}"; do
-    if [ -e ~/$file ] && [ ! -h ~/$file ]; then
-        echo "$file exists"
-        mv ~/$file ~/$file.$$.bak
-    fi
-done
+if [ -z "$NO_BACKUP" -o "$NO_BACKUP" != "true" ]; then
+    files=( .vimrc .vim .gitconfig .bashrc .bash .irbrc .ackrc .screenrc bin .zshrc .oh-my-zsh/custom/aliases.zsh .oh-my-zsh/custom/env.zsh )
+    for file in "${files[@]}"; do
+        if [ -e ~/$file ] && [ ! -h ~/$file ]; then
+            echo "$file exists"
+            mv ~/$file ~/$file.$$.bak
+        fi
+    done
+fi
 
 cur=$(dirname "$(abspath $0)")
 
-makelink $cur/vimrc    ~/.vimrc
-makelink $cur/dotvim   ~/.vim 
-makelink $cur/bashrc   ~/.bashrc
-makelink $cur/bash     ~/.bash
-makelink $cur/irbrc    ~/.irbrc
-makelink $cur/ackrc    ~/.ackrc
-makelink $cur/screenrc ~/.screenrc
-makelink $cur/bin      ~/bin
-makelink $cur/zshrc    ~/.zshrc
-makelink $cur/zsh/aliases.zsh ~/.oh-my-zsh/custom/ 
-makelink $cur/zsh/env.zsh ~/.oh-my-zsh/custom/ 
+makelink $cur/vimrc           $installdir/.vimrc
+makelink $cur/dotvim          $installdir/.vim
+makelink $cur/bashrc          $installdir/.bashrc
+makelink $cur/bash            $installdir/.bash
+makelink $cur/irbrc           $installdir/.irbrc
+makelink $cur/ackrc           $installdir/.ackrc
+makelink $cur/screenrc        $installdir/.screenrc
+makelink $cur/bin             $installdir/bin
+makelink $cur/zshrc           $installdir/.zshrc
+makelink $cur/zsh/aliases.zsh $installdir/.oh-my-zsh/custom/
+makelink $cur/zsh/env.zsh     $installdir/.oh-my-zsh/custom/
 
 #only if ssh dir isn't already there...
-if [ ! -d ~/.ssh ]; then
-    makelink $cur/ssh    ~/.ssh
+if [ ! -d $installdir/.ssh ]; then
+    makelink $cur/ssh    $installdir/.ssh
 fi
 
 #github config
@@ -54,11 +77,13 @@ for file in "${gitpass[@]}"; do
         echo "using $file"
         token=$(cat $file)
         sed "s/__GITHUB_TOKEN__/$token/" < $cur/gitconfig.tmpl > $cur/gitconfig
-        makelink $cur/gitconfig ~/.gitconfig
+        makelink $cur/gitconfig $installdir/.gitconfig
         break
     else
         echo "skipping $file"
     fi
 done
 
-touch ~/.dotfiles-installed
+if [ $home_install == "true" ]; then
+  touch ~/.dotfiles-installed
+fi

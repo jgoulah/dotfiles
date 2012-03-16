@@ -22,3 +22,12 @@ alias curl-akamai='curl -I -H "Pragma: akamai-x-cache-on, akamai-x-cache-remote-
 # knife-dev 
 function knife-dev() { /usr/bin/knife $@ -c ~/.chef/knifedev.rb ;}
 
+# copy to osx clipboard from remote host
+alias lcp="ssh `echo $SSH_CLIENT | awk '{print "jgoulah@" $1}'` pbcopy"
+
+# pull all git submodules
+alias subpull='git submodule foreach git pull'
+alias subup='subpull'
+
+# dump the query and other interesting bits from a tcpdump
+function mshark() { tshark -d tcp.port==3306,mysql -T fields -R mysql.query -e frame.time -e ip.src -e ip.dst -e mysql.query -r $1 ;}
