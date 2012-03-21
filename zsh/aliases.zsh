@@ -1,3 +1,5 @@
+bindkey "\C-b" backward-word
+bindkey "\C-f" forward-word
 
 alias ll='ls -al'
 alias pu='pushd .'
