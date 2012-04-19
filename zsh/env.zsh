@@ -1,6 +1,7 @@
 
 export PATH=/sbin:/usr/sbin:~/bin:/usr/local/bin:/usr/bin:/bin
 export PATH=$PATH:/usr/local/postgresql-8.3/bin
+export PATH=$PATH:~/dev/DevTools
 # for mac
 export PATH=$PATH:"/Library/Application Support/VMware Fusion"
 
@@ -18,11 +19,16 @@ export TERM=xterm-256color
 export ETSY_ENVIRONMENT=development
 export SEARCH_SERVER_ENV=dev
 
+export LANG="en_US.UTF-8"
+
 # Set up local perl environment
 [[ -d "$HOME/perl5/lib/perl5" ]] && eval `perl -I$HOME/perl5/lib/perl5 -Mlocal::lib`
 
 # Set up rvm
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+
+# Set up nvm
+[[ -s "$HOME/.nvm/nvm.sh" ]] && . "$HOME/.nvm/nvm.sh"
 
 # private ec2 stuff
 if [ -f /etc/ec2_keys ]; then
