@@ -1,1 +1,3 @@
 gitconfig
+ssh/id_dsa
+ssh/known_hosts
