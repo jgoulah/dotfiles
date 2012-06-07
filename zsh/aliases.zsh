@@ -33,3 +33,23 @@ alias subup='subpull'
 
 # dump the query and other interesting bits from a tcpdump
 function mshark() { tshark -d tcp.port==3306,mysql -T fields -R mysql.query -e frame.time -e ip.src -e ip.dst -e mysql.query -r $1 ;}
+
+# top tables by count
+function mysql-top-tables-requested() { tcpdump -r $1 -n -x -q -tttt | pt-query-digest --type tcpdump --group-by tables --order-by Query_time:cnt --report-format profile --limit 25 }
+
+# top tables by response time 
+function mysql-top-tables-resp() { tcpdump -r $1 -n -x -q -tttt | pt-query-digest --type tcpdump --group-by tables --report-format profile }
+
+# query report for slow queries
+function mysql-top-slow-queries() { tcpdump -r $1 -n -x -q -tttt | pt-query-digest --type tcpdump --filter '($event->{No_index_used} eq "Yes" || $event->{No_good_index_used} eq "Yes")' }
+
+# dsh out to the knife role b/c knife ssh gives me issues sometimes
+# usage: knife-dsh-role <role> <command>
+function knife-dsh-role() { dsh -F 10 -M -r ssh -o "-o StrictHostKeyChecking=no" -o "-ldevman" -m "$(knife search node role:$1 -a name | grep "name:" | awk '{print $2}' | perl -pi -e "s|\n|,|" | perl -pi -e "s|,$||" )" "$2" }
+
+# usage: knife-dsh-domain <domain> <command>
+function knife-dsh-domain() { dsh -F 10 -M -r ssh -o "-o StrictHostKeyChecking=no" -o "-ldevman" -m "$(knife search node domain:$1 -a name | grep "name:" | awk '{print $2}' | perl -pi -e "s|\n|,|" | perl -pi -e "s|,$||" )" "$2" }
+
+function find-virt() { knife search node "virtualization_*_guests:$1" -a fqdn }
+
+alias run-shef="sudo -E RUBYLIB=~/wdir/chef/chef/lib:$RUBYLIB ~/wdir/chef/chef/bin/shef --log-level debug --solo --config ~/.chef/shef.rb -j ~/.chef/shef-attribs.json"
