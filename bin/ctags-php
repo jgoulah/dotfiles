@@ -1,7 +1,7 @@
 #!/bin/bash
 cd ~/development
 
-for i in Web Photos ; do 
+for i in Web Photos virtual-machines ; do
     echo "tagging $i"
     pushd $i 
     ctags -f ~/.vimtags/$i \
