@@ -1,0 +1,14 @@
+#!/bin/bash
+
+for i in '/home/jgoulah/wdir/chef /home/jgoulah/dev/deployinator' ; do 
+    echo "tagging $i"
+    name=${i##*\/}
+    echo "name is $name"
+    pushd $i
+    ctags -f ~/.vimtags/${name}.ruby -R \
+    --links=no \
+    --totals=yes \
+    --tag-relative=yes
+    popd
+
+done;
