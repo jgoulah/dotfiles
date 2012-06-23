@@ -133,11 +133,20 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>
 " let w!! write a file with root priv
 cmap w!! w !sudo tee % >/dev/null
 
-" use command-t plugin with ,t
-nmap <silent> <leader>t <Esc>:tabe<CR>:CommandT<CR>
+" just command line to open file with ,t
+nmap <leader>t <Esc>:tabe
+
+" use command-t plugin with ,ct
+nmap <silent> <leader>ct <Esc>:tabe<CR>:CommandT<CR>
 
 " use ,W to strip all trailing whitespace
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+
+" Use v or # to get a variable interpolation (inside of a string)}
+" ysiw#   Wrap the token under the cursor in #{}
+" v...s#  Wrap the selection in #{}
+let g:surround_113 = "#{\r}"   " v
+let g:surround_35  = "#{\r}"   " #
 
 " PHP Specific
 autocmd FileType php let php_sql_query=1 "sql-syntax highlighting
@@ -163,7 +172,7 @@ nnoremap <silent> <F5> :YRShow<cr>
 inoremap <silent> <F5> n_url<ESC>:YRShow<cr>
 
 " toggle nerd tree with <F2>
-map <F2> :NERDTreeToggle<CR>
+map <F2> :NERDTreeTabsToggle<CR>
 map <F3> :TlistToggle<CR>
 
 " ,w to open a split window and switch to it
