@@ -138,7 +138,7 @@ nmap <silent> <leader>sv :so $MYVIMRC<CR>
 cmap w!! w !sudo tee % >/dev/null
 
 " just command line to open file with ,t
-nmap <leader>t <Esc>:tabe
+nmap <leader>t <Esc>:tabe 
 
 " use command-t plugin with ,ct
 nmap <silent> <leader>ct <Esc>:tabe<CR>:CommandT<CR>
