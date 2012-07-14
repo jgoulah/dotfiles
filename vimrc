@@ -10,10 +10,10 @@ set laststatus=2
 syntax enable 
 "set t_Co=256
 set background=dark
-let g:solarized_termcolors=16
-let g:solarized_termtrans=1
-colorscheme solarized
-    "colorscheme oceanblack 
+"let g:solarized_termcolors=16
+"let g:solarized_termtrans=1
+"colorscheme solarized
+    colorscheme oceanblack 
     "colors darkblue
     "colorscheme mustang 
     "colorscheme symfony 
