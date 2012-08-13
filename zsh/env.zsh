@@ -30,6 +30,9 @@ export LANG="en_US.UTF-8"
 # Set up nvm
 [[ -s "$HOME/.nvm/nvm.sh" ]] && . "$HOME/.nvm/nvm.sh"
 
+# review script autocomplete
+[[ -s "/etc/profile.d/etsy-review-comp.sh" ]] && . "/etc/profile.d/etsy-review-comp.sh"
+
 # private ec2 stuff
 if [ -f /etc/ec2_keys ]; then
     source /etc/ec2_keys
