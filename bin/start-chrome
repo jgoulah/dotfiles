@@ -1,5 +1,5 @@
 #!/bin/sh
 
-active=$(ps -ef | grep X | grep -v grep | awk {'print $9'})
+active=$(ps -ef | grep "[b]in/X" | awk {'print $9'})
 echo "starting on $active"
 DISPLAY=$active /usr/bin/google-chrome --allow-file-access-from-files --disable-bundled-ppapi-flash &
