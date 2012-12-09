@@ -1,0 +1,14 @@
+#!/bin/bash
+
+for i in '/usr/local/go/src/cmd' ; do 
+    echo "tagging $i"
+    name=${i##*\/}
+    echo "name is $name"
+    pushd $i
+    ctags -f ~/.vimtags/${name}.go -R \
+    --links=no \
+    --totals=yes \
+    --tag-relative=yes
+    popd
+
+done;
