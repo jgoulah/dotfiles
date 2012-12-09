@@ -1,0 +1,5 @@
+#!/bin/sh
+
+active=$(ps -ef | grep "[b]in/X" | awk {'print $9'})
+echo "starting on $active"
+DISPLAY=$active nohup /usr/bin/mythfrontend >> /var/log/mythtv/mythfrontend.log 2>&1 &
