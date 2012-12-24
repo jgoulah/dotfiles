@@ -7,6 +7,8 @@ export PATH=$PATH:"/Library/Application Support/VMware Fusion"
 # go
 export GOROOT=/usr/local/go
 export PATH=$PATH:$GOROOT/bin
+# versionswitcher
+export VS_HOME=$HOME/.lang
 
 # default node path
 export NODE_PATH=/usr/local/lib/node_modules
@@ -35,6 +37,9 @@ export LANG="en_US.UTF-8"
 
 # review script autocomplete
 [[ -s "/etc/profile.d/etsy-review-comp.sh" ]] && . "/etc/profile.d/etsy-review-comp.sh"
+
+# versionswitcher http://versionswitcher.appspot.com/
+[[ -s "$HOME/.vs/scripts/bootstrap.sh" ]] && . "$HOME/.vs/scripts/bootstrap.sh"
 
 # private ec2 stuff
 if [ -f /etc/ec2_keys ]; then

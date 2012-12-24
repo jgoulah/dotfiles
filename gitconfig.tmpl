@@ -1,6 +1,6 @@
 [user]
-    name = John Goulah 
-    email = jgoulah@gmail.com 
+    name = John Goulah
+    email = jgoulah@gmail.com
 [github]
     user = jgoulah
     token = __GITHUB_TOKEN__
@@ -28,10 +28,22 @@
     br = branch
     co = checkout
     df = diff
+    dc = diff --cached
     l = log --graph --decorate
     lg = log --decorate -p
     ap = add --patch
-	unstage = reset HEAD
+    unstage = reset HEAD
+    # commits in short form
+    ls = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+    # commits showing changed files
+    ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+    # find file containing arg
+    f = "!git ls-files | grep -i"
+    # find string in codebase
+    grep = grep -Ii
+    gr = grep -Ii
+    # list aliases
+    la = "!git config -l | grep alias | cut -c 7-"
 [apply]
 	whitespace = nowarn
 [gist]
