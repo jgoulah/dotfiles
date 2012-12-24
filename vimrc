@@ -91,7 +91,6 @@ map <S-h> gT
 map <S-l> gt
 map <C-h> gT
 map <C-l> gt
-nmap <S-t> :tabnew<CR>
 map <leader>tn :tabnew<cr>
 map <leader>te :tabedit
 map <leader>tc :tabclose<cr>
