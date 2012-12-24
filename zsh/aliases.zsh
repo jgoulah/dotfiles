@@ -11,6 +11,11 @@ alias tail-error='tail -f /var/log/httpd/php.log'
 alias tail-gearman='tail -f /var/log/gearman/php.log'
 alias tail-logs='tail -f /var/log/httpd/php.log /var/log/httpd/info.log /var/log/httpd/error_log /var/log/gearman/php.log'
 
+alias ai='sudo apt-get install'
+alias as='apt-cache search'
+alias yi='sudo yum install'
+alias ys='yum search'
+
 alias gist='gist -p'
 alias git-log-graph='git log --oneline --graph --decorate'
 alias git-word-diff='git diff --word-diff'
