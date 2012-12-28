@@ -27,7 +27,7 @@ export SEARCH_SERVER_ENV=dev
 export LANG="en_US.UTF-8"
 
 # Set up local perl environment
-[[ -d "$HOME/perl5/lib/perl5" ]] && eval `perl -I$HOME/perl5/lib/perl5 -Mlocal::lib`
+[[ -s "$HOME/perl5/perlbrew/etc/bashrc" ]] && . $HOME/perl5/perlbrew/etc/bashrc
 
 # Set up rvm
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
