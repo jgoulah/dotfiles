@@ -57,6 +57,6 @@ function knife-dsh-domain() { dsh -F 10 -M -r ssh -o "-o StrictHostKeyChecking=n
 
 function find-virt() { knife search node "virtualization_*_guests:$1" -a fqdn }
 
-alias run-shef="sudo -E RUBYLIB=~/wdir/chef/chef/lib:$RUBYLIB ~/wdir/chef/chef/bin/shef --log-level debug --solo --config ~/.chef/shef.rb -j ~/.chef/shef-attribs.json"
+alias run-shef="sudo -E RUBYLIB=~/wdir/chef/lib:$RUBYLIB ~/wdir/chef/bin/shef --log-level debug --solo --config ~/.chef/shef.rb -j ~/.chef/shef-attribs.json"
 
 function fix-host() { sed -i -e "$1 d" ~/.ssh/known_hosts }
