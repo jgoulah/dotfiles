@@ -3,7 +3,7 @@ export PATH=/sbin:/usr/sbin:~/bin:/usr/local/bin:/usr/bin:/bin
 export PATH=$PATH:/usr/local/postgresql-8.3/bin
 export PATH=$PATH:~/dev/DevTools
 # for mac
-export PATH=$PATH:"/Library/Application Support/VMware Fusion"
+export PATH=$PATH:"/Library/Application\ Support/VMware\ Fusion"
 # go
 export GOROOT=/usr/local/go
 export PATH=$PATH:$GOROOT/bin
