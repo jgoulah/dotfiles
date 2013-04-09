@@ -8,9 +8,10 @@ set -e
 # s3fs#kj-katies-photos  /mnt/s3/goulah-katies-photos fuse allow_other,accessKeyId=key,secretAccessKey=secret,use_rrs=1 0 0
 
 # heres the bucket/directory info
-dirs[0]="katies-photos"
-dirs[1]="katiejanephotography"
-dirs[2]="backups"
+dirs[0]="kjp2013"
+#dirs[0]="katies-photos"
+#dirs[1]="katiejanephotography"
+#dirs[2]="backups"
 
 # for extra debug info
 debug=0
@@ -19,7 +20,7 @@ debug=0
 function mountdir {
     dir=$1
 
-    if ( ! mountpoint -q $dir ); then
+    if ( ! mountpoint -q $dir/ ); then
         echo "attempting to mount $dir"
         if ( ! sudo mount $dir ); then
             echo "mount of $dir failed"

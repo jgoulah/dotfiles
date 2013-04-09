@@ -81,7 +81,7 @@ let g:yankring_history_dir = '$HOME/.vim/tmp/yankring'
 let g:yankring_manage_numbered_reg = 1
 
 " open tag in new window
-map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+map <C-\> :tab split<CR>:exec("ts ".expand("<cword>"))<CR>
 
 " open up chef file under cursor in a new tab
 map <leader>c :tab split<CR>:ChefFindAny<CR>
@@ -91,7 +91,6 @@ map <S-h> gT
 map <S-l> gt
 map <C-h> gT
 map <C-l> gt
-nmap <S-t> :tabnew<CR>
 map <leader>tn :tabnew<cr>
 map <leader>te :tabedit
 map <leader>tc :tabclose<cr>
