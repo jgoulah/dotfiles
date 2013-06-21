@@ -5,7 +5,7 @@ alias ll='ls -al'
 alias pu='pushd .'
 alias po='popd'
 alias vim='vim -p'
-alias json='json_xs | less | pygmentize -l js'
+alias json='jsonpretty | less | pygmentize -l js'
 alias tail-info='tail -f /var/log/httpd/info.log'
 alias tail-error='tail -f /var/log/httpd/php.log'
 alias tail-gearman='tail -f /var/log/gearman/php.log'
@@ -63,3 +63,14 @@ function find-virt() { knife search node "virtualization_*_guests:$1" -a fqdn }
 alias run-shef="sudo -E RUBYLIB=~/wdir/chef/lib:$RUBYLIB ~/wdir/chef/bin/shef --log-level debug --solo --config ~/.chef/shef.rb -j ~/.chef/shef-attribs.json"
 
 function fix-host() { sed -i -e "$1 d" ~/.ssh/known_hosts }
+
+# get jobs from oozie
+alias get-doop-jobs='curl http://hadooputil01.ny4.etsy.com:11000/oozie/v1/jobs | json'
+# info on a particular job
+function get-doop-job() { curl http://hadooputil01.ny4.etsy.com:11000/oozie/v1/job/$1 | json }
+# find a job in our code
+function findjob() {
+  findstring=".*$1\.(scala|rb).*"
+  find ~/development/BigData/lib/jobs/scalding ~/development/BigData/lib/jobs/cascading -regextype posix-awk -iregex $findstring
+}
+
