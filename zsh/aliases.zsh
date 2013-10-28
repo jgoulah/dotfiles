@@ -5,7 +5,7 @@ alias ll='ls -al'
 alias pu='pushd .'
 alias po='popd'
 alias vim='vim -p'
-alias json='json_xs | less | pygmentize -l js'
+alias json='jsonpretty | less | pygmentize -l js'
 alias tail-info='tail -f /var/log/httpd/info.log'
 alias tail-error='tail -f /var/log/httpd/php.log'
 alias tail-gearman='tail -f /var/log/gearman/php.log'
@@ -48,6 +48,9 @@ function mysql-top-tables-resp() { tcpdump -r $1 -n -x -q -tttt | pt-query-diges
 # query report for slow queries
 function mysql-top-slow-queries() { tcpdump -r $1 -n -x -q -tttt | pt-query-digest --type tcpdump --filter '($event->{No_index_used} eq "Yes" || $event->{No_good_index_used} eq "Yes")' }
 
+# memshark - arg is pcap file
+function memshark() { tshark -d tcp.port==11211,memcache -T fields -R memcache.command -R memcache.key -R memcache.value.length -e frame.time -e ip.src -e ip.dst -e tcp.srcport -e memcache.command -e memcache.key -e memcache.value.length -r $1 ;}
+
 # dsh out to the knife role b/c knife ssh gives me issues sometimes
 # usage: knife-dsh-role <role> <command>
 function knife-dsh-role() { dsh -F 10 -M -r ssh -o "-o StrictHostKeyChecking=no" -o "-ldevman" -m "$(knife search node role:$1 -a name | grep "name:" | awk '{print $2}' | perl -pi -e "s|\n|,|" | perl -pi -e "s|,$||" )" "$2" }
@@ -60,3 +63,14 @@ function find-virt() { knife search node "virtualization_*_guests:$1" -a fqdn }
 alias run-shef="sudo -E RUBYLIB=~/wdir/chef/lib:$RUBYLIB ~/wdir/chef/bin/shef --log-level debug --solo --config ~/.chef/shef.rb -j ~/.chef/shef-attribs.json"
 
 function fix-host() { sed -i -e "$1 d" ~/.ssh/known_hosts }
+
+# get jobs from oozie
+alias get-doop-jobs='curl http://hadooputil01.ny4.etsy.com:11000/oozie/v1/jobs | json'
+# info on a particular job
+function get-doop-job() { curl http://hadooputil01.ny4.etsy.com:11000/oozie/v1/job/$1 | json }
+# find a job in our code
+function findjob() {
+  findstring=".*$1\.(scala|rb).*"
+  find ~/development/BigData/lib/jobs/scalding ~/development/BigData/lib/jobs/cascading -regextype posix-awk -iregex $findstring
+}
+
