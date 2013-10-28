@@ -6,7 +6,8 @@ export PATH=$PATH:~/dev/DevTools
 export PATH=$PATH:"/Library/Application Support/VMware Fusion"
 # go
 export GOROOT=/usr/local/go
-export PATH=$PATH:$GOROOT/bin
+export GOPATH=$HOME/wdir/go
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 # versionswitcher
 export VS_HOME=$HOME/.lang
 
