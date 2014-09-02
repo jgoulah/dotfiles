@@ -213,3 +213,7 @@ endif
 
 " ctags force multiple match list
 noremap  <C-]>  g<C-]>
+
+" go format
+let g:gofmt_command = "goimports"
+autocmd BufWritePre *.go Fmt
