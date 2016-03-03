@@ -22,10 +22,9 @@ export EDITOR=vim
 
 export TERM=xterm-256color
 
-export ETSY_ENVIRONMENT=development
-export SEARCH_SERVER_ENV=dev
-
 export LANG="en_US.UTF-8"
+
+[[ -s "/usr/local/bin/docker-machine" ]] && eval $(/usr/local/bin/docker-machine env default)
 
 # Set up local perl environment
 [[ -s "$HOME/perl5/perlbrew/etc/bashrc" ]] && . $HOME/perl5/perlbrew/etc/bashrc
