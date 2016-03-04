@@ -1,0 +1,5 @@
+#!/bin/sh
+
+active=$(ps -ef | grep "[b]in/X" | awk {'print $9'})
+echo "starting on $active"
+DISPLAY=$active nohup /usr/bin/google-chrome --allow-file-access-from-files --disable-bundled-ppapi-flash >> /var/log/chrome/chrome.log 2>&1 &

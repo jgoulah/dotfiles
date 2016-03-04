@@ -81,7 +81,7 @@ let g:yankring_history_dir = '$HOME/.vim/tmp/yankring'
 let g:yankring_manage_numbered_reg = 1
 
 " open tag in new window
-map <C-\> :tab split<CR>:exec("tag ".expand("<cword>"))<CR>
+map <C-\> :tab split<CR>:exec("ts ".expand("<cword>"))<CR>
 
 " open up chef file under cursor in a new tab
 map <leader>c :tab split<CR>:ChefFindAny<CR>
@@ -214,3 +214,7 @@ endif
 
 " ctags force multiple match list
 noremap  <C-]>  g<C-]>
+
+" go format
+let g:gofmt_command = "goimports"
+autocmd BufWritePre *.go Fmt

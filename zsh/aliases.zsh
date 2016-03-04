@@ -5,11 +5,16 @@ alias ll='ls -al'
 alias pu='pushd .'
 alias po='popd'
 alias vim='vim -p'
-alias json='json_xs | less | pygmentize -l js'
+alias json='jsonpretty | less | pygmentize -l js'
 alias tail-info='tail -f /var/log/httpd/info.log'
 alias tail-error='tail -f /var/log/httpd/php.log'
 alias tail-gearman='tail -f /var/log/gearman/php.log'
 alias tail-logs='tail -f /var/log/httpd/php.log /var/log/httpd/info.log /var/log/httpd/error_log /var/log/gearman/php.log'
+
+alias ai='sudo apt-get install'
+alias as='apt-cache search'
+alias yi='sudo yum install'
+alias ys='yum search'
 
 alias gist='gist -p'
 alias git-log-graph='git log --oneline --graph --decorate'
@@ -42,6 +47,9 @@ function mysql-top-tables-resp() { tcpdump -r $1 -n -x -q -tttt | pt-query-diges
 
 # query report for slow queries
 function mysql-top-slow-queries() { tcpdump -r $1 -n -x -q -tttt | pt-query-digest --type tcpdump --filter '($event->{No_index_used} eq "Yes" || $event->{No_good_index_used} eq "Yes")' }
+
+# memshark - arg is pcap file
+function memshark() { tshark -d tcp.port==11211,memcache -T fields -R memcache.command -R memcache.key -R memcache.value.length -e frame.time -e ip.src -e ip.dst -e tcp.srcport -e memcache.command -e memcache.key -e memcache.value.length -r $1 ;}
 
 # dsh out to the knife role b/c knife ssh gives me issues sometimes
 # usage: knife-dsh-role <role> <command>

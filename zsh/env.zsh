@@ -1,9 +1,10 @@
-
 export PATH=/sbin:/usr/sbin:~/bin:/usr/local/bin:/usr/bin:/bin
-export PATH=$PATH:/usr/local/postgresql-8.3/bin
-export PATH=$PATH:~/dev/DevTools
-# for mac
-export PATH=$PATH:"/Library/Application Support/VMware Fusion"
+# go
+export GOROOT=/usr/local/go
+export GOPATH=$HOME/wdir/go
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+# versionswitcher
+export VS_HOME=$HOME/.lang
 
 # default node path
 export NODE_PATH=/usr/local/lib/node_modules
@@ -15,14 +16,16 @@ export PERL_MM_USE_DEFAULT=1
 export EDITOR=vim
 
 export TERM=xterm-256color
-
-export ETSY_ENVIRONMENT=development
-export SEARCH_SERVER_ENV=dev
-
 export LANG="en_US.UTF-8"
+
+# docker
+[[ -s "/usr/local/bin/docker-machine" ]] && eval $(/usr/local/bin/docker-machine env default)
 
 # Set up local perl environment
 [[ -d "$HOME/perl5/lib/perl5" ]] && eval `perl -I$HOME/perl5/lib/perl5 -Mlocal::lib`
+
+# Set up local perl environment
+[[ -s "$HOME/perl5/perlbrew/etc/bashrc" ]] && . $HOME/perl5/perlbrew/etc/bashrc
 
 # Set up rvm
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
