@@ -20,6 +20,9 @@ alias gist='gist -p'
 alias git-log-graph='git log --oneline --graph --decorate'
 alias git-word-diff='git diff --word-diff'
 
+# env reload
+alias s='source ~/.zshrc && rehash'
+
 # curl + stats
 alias curltime='curl -o /dev/null -s -w '\''Return Code = %{http_code}\nBytes recieved = %{size_download}\nDNS = %{time_namelookup}\nConnect = %{time_connect} \nPretransfer = %{time_pretransfer}\nStart transfer = %{time_starttransfer}\nTotal = %{time_total}\n'\'''
 
