@@ -5,7 +5,7 @@ alias ll='ls -al'
 alias pu='pushd .'
 alias po='popd'
 alias vim='vim -p'
-alias json='jsonpretty | less | pygmentize -l js'
+alias json='python -mjson.tool'
 alias tail-info='tail -f /var/log/httpd/info.log'
 alias tail-error='tail -f /var/log/httpd/php.log'
 alias tail-gearman='tail -f /var/log/gearman/php.log'
@@ -66,3 +66,12 @@ function find-virt() { knife search node "virtualization_*_guests:$1" -a fqdn }
 alias run-shef="sudo -E RUBYLIB=~/wdir/chef/chef/lib:$RUBYLIB ~/wdir/chef/chef/bin/shef --log-level debug --solo --config ~/.chef/shef.rb -j ~/.chef/shef-attribs.json"
 
 function fix-host() { sed -i -e "$1 d" ~/.ssh/known_hosts }
+
+# docker shortcuts
+alias dps='docker ps'
+alias dsl='docker ps -l'
+alias di='docker images'
+function de() { docker exec -it $1 /bin/bash }
+function ds() { docker stop $1 }
+function drm() { docker rm $1 }
+function drmi() { docker rmi $1 }
