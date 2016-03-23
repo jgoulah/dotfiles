@@ -43,3 +43,27 @@ fi
 function precmd () {
   _z --add "$(pwd -P)"
 }
+
+# load any environment vars that contain secrets
+env_secrets="~/.oh-my-zsh/custom/env-secrets.zsh"
+if [ -f $env_secrets ]; then
+    source $env_secrets
+fi
+
+# setup java home
+osx_java_home="/Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home"
+if [ -d $osx_java_home ]; then
+  export JAVA_HOME=$osx_java_home
+fi
+
+# setup ec2 tools
+ec2_tools="/usr/local/ec2/ec2-api-tools/"
+if [ -d $ec2_tools ]; then
+  export EC2_HOME=$ec2_tools
+  export PATH=$PATH:$EC2_HOME/bin
+fi
+
+# source chef dk env vars
+if [ -f /opt/chefdk/bin/chef ]; then
+  eval "$(chef shell-init zsh)"
+fi
