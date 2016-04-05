@@ -64,25 +64,12 @@ makelink $cur/bin             $installdir/bin
 makelink $cur/zshrc           $installdir/.zshrc
 makelink $cur/zsh/aliases.zsh $installdir/.oh-my-zsh/custom/
 makelink $cur/zsh/env.zsh     $installdir/.oh-my-zsh/custom/
+makelink $cur/gitconfig $installdir/.gitconfig
 
 #only if ssh dir isn't already there...
 if [ ! -d $installdir/.ssh ]; then
     makelink $cur/ssh    $installdir/.ssh
 fi
-
-#github config
-gitpass=( ~/.github_pass /etc/github_pass )
-for file in "${gitpass[@]}"; do
-    if [ -f $file ]; then
-        echo "using $file"
-        token=$(cat $file)
-        sed "s/__GITHUB_TOKEN__/$token/" < $cur/gitconfig.tmpl > $cur/gitconfig
-        makelink $cur/gitconfig $installdir/.gitconfig
-        break
-    else
-        echo "skipping $file"
-    fi
-done
 
 if [ $home_install == "true" ]; then
   touch ~/.dotfiles-installed
