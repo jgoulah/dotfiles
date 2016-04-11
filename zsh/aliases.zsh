@@ -71,7 +71,11 @@ function fix-host() { sed -i -e "$1 d" ~/.ssh/known_hosts }
 alias dps='docker ps'
 alias dsl='docker ps -l'
 alias di='docker images'
-function de() { docker exec -it $1 /bin/bash }
+function de() {
+    #docker exec -it $1 /bin/bash
+    # for a psedo tty to run screen
+    docker exec -it -u jgoulah $1 script -q -c "/bin/zsh" /dev/null
+}
 function ds() { docker stop $1 }
 function drm() { docker rm $1 }
 function drmi() { docker rmi $1 }
