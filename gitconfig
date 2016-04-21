@@ -52,3 +52,5 @@
 [gist]
 	private = yes
 	extension = .md
+[push]
+	default = simple
