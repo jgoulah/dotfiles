@@ -17,5 +17,4 @@ hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u
 #termcapinfo xterm ti@:te@
 termcapinfo xterm 'is=\E[r\E[m\E[2J\E[H\E[?7h\E[?1;4;6l'
 
-#term screen-256
-shell "/usr/bin/zsh"
+term xterm-256color
