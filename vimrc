@@ -49,12 +49,6 @@ set ignorecase
 set smartcase
 set nu
 
-" fix arrow keys that display ABCD on remote shell
-set t_ku=[A
-set t_kd=[B
-set t_kr=[C
-set t_kl=[D
-
 " wipe out highlights if using hlsearch
 nnoremap <leader><space> :noh<cr>
 
