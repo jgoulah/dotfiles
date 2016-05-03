@@ -76,6 +76,9 @@ function de() {
     # for a psedo tty to run screen
     docker exec -it -u jgoulah $1 script -q -c "/bin/zsh" /dev/null
 }
+function dl() {
+  docker exec -it -u jgoulah $(docker ps -q | head -n1) script -q -c "/bin/zsh" /dev/null
+}
 function ds() { docker stop $1 }
 function drm() { docker rm $1 }
 function drmi() { docker rmi $1 }
