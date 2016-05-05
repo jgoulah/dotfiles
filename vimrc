@@ -98,6 +98,8 @@ map <leader>tn :tabnew<cr>
 map <leader>te :tabedit
 map <leader>tc :tabclose<cr>
 map <leader>tm :tabmove
+" refresh all tabs
+map <leader>tr :checkt<cr>
 
 " shift + tab to un-indent
 imap <S-Tab> <C-o><<
