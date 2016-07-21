@@ -25,6 +25,8 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 set autoindent
+autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
+autocmd Filetype go setlocal noet ts=4 sw=4 sts=4
 
 set ttyfast
 set noswapfile
@@ -91,10 +93,13 @@ map <S-h> gT
 map <S-l> gt
 map <C-h> gT
 map <C-l> gt
+nmap <S-t> :tabnew<CR>
 map <leader>tn :tabnew<cr>
 map <leader>te :tabedit
 map <leader>tc :tabclose<cr>
 map <leader>tm :tabmove
+" refresh all tabs
+map <leader>tr :checkt<cr>
 
 " shift + tab to un-indent
 imap <S-Tab> <C-o><<

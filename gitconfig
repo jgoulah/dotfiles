@@ -3,7 +3,6 @@
     email = jgoulah@gmail.com
 [github]
     user = jgoulah
-    token = __GITHUB_TOKEN__
 [branch]
     autosetupmerge = true
 [color]
@@ -28,6 +27,10 @@
     br = branch
     co = checkout
     df = diff
+    l = log --graph --decorate
+    lg = log --decorate -p
+    ap = add --patch
+	unstage = reset HEAD
     dc = diff --cached
     l = log --graph --decorate
     lg = log --decorate -p
@@ -49,3 +52,5 @@
 [gist]
 	private = yes
 	extension = .md
+[push]
+	default = simple

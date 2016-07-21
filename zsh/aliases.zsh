@@ -5,7 +5,7 @@ alias ll='ls -al'
 alias pu='pushd .'
 alias po='popd'
 alias vim='vim -p'
-alias json='jsonpretty | less | pygmentize -l js'
+alias json='python -mjson.tool'
 alias tail-info='tail -f /var/log/httpd/info.log'
 alias tail-error='tail -f /var/log/httpd/php.log'
 alias tail-gearman='tail -f /var/log/gearman/php.log'
@@ -19,6 +19,9 @@ alias ys='yum search'
 alias gist='gist -p'
 alias git-log-graph='git log --oneline --graph --decorate'
 alias git-word-diff='git diff --word-diff'
+
+# env reload
+alias s='source ~/.zshrc && rehash'
 
 # curl + stats
 alias curltime='curl -o /dev/null -s -w '\''Return Code = %{http_code}\nBytes recieved = %{size_download}\nDNS = %{time_namelookup}\nConnect = %{time_connect} \nPretransfer = %{time_pretransfer}\nStart transfer = %{time_starttransfer}\nTotal = %{time_total}\n'\'''
@@ -60,17 +63,22 @@ function knife-dsh-domain() { dsh -F 10 -M -r ssh -o "-o StrictHostKeyChecking=n
 
 function find-virt() { knife search node "virtualization_*_guests:$1" -a fqdn }
 
-alias run-shef="sudo -E RUBYLIB=~/wdir/chef/lib:$RUBYLIB ~/wdir/chef/bin/shef --log-level debug --solo --config ~/.chef/shef.rb -j ~/.chef/shef-attribs.json"
+alias run-shef="sudo -E RUBYLIB=~/wdir/chef/chef/lib:$RUBYLIB ~/wdir/chef/chef/bin/shef --log-level debug --solo --config ~/.chef/shef.rb -j ~/.chef/shef-attribs.json"
 
 function fix-host() { sed -i -e "$1 d" ~/.ssh/known_hosts }
 
-# get jobs from oozie
-alias get-doop-jobs='curl http://hadooputil01.ny4.etsy.com:11000/oozie/v1/jobs | json'
-# info on a particular job
-function get-doop-job() { curl http://hadooputil01.ny4.etsy.com:11000/oozie/v1/job/$1 | json }
-# find a job in our code
-function findjob() {
-  findstring=".*$1\.(scala|rb).*"
-  find ~/development/BigData/lib/jobs/scalding ~/development/BigData/lib/jobs/cascading -regextype posix-awk -iregex $findstring
+# docker shortcuts
+alias dps='docker ps'
+alias dsl='docker ps -l'
+alias di='docker images'
+function de() {
+    #docker exec -it $1 /bin/bash
+    # for a psedo tty to run screen
+    docker exec -it -u jgoulah $1 script -q -c "/bin/zsh" /dev/null
 }
-
+function dl() {
+  docker exec -it -u jgoulah $(docker ps -q | head -n1) script -q -c "/bin/zsh" /dev/null
+}
+function ds() { docker stop $1 }
+function drm() { docker rm $1 }
+function drmi() { docker rmi $1 }
