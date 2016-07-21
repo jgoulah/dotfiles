@@ -1,0 +1,19 @@
+#!/bin/sh
+## download s3cmd http://s3tools.org/s3cmd
+## and put the path here, 
+## also run s3cmd --configure before running this script
+s3cmd=/home/jgoulah/wdir/s3cmd-master/s3cmd
+
+# top level that you want to purge
+bucket="kj-katiejanephotography/Zan Goldblatt & Stephen Clark - wedding/WEDDING 2/Print"
+
+# this does a recursive ls
+$s3cmd ls -r "s3://$bucket" | awk '{$1=$2=$3=""; print $0}'  > glacier-restore.txt
+
+# loop through, this way accounts for files with spaces
+cat glacier-restore.txt | while IFS= read -r file; do
+    # strip leading whitespace
+    file=$(echo "${file}" | sed -e 's/^[[:space:]]*//')
+    echo "restoring '$file'"
+    $s3cmd restore -D 3 "$file"
+done
