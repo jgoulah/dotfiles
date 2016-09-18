@@ -6,7 +6,7 @@ startup_message off
 #altscreen on
 
 defflow auto
-defscrollback 50000
+defscrollback 500000
 
 #change the hardstatus settings to give an window list at the bottom of the                                                                        
 #screen, with the time and date and with the current window highlighted                                                                            

@@ -19,6 +19,7 @@ alias ys='yum search'
 alias gist='gist -p'
 alias git-log-graph='git log --oneline --graph --decorate'
 alias git-word-diff='git diff --word-diff'
+#alias git=hub
 
 # env reload
 alias s='source ~/.zshrc && rehash'
@@ -82,3 +83,5 @@ function dl() {
 function ds() { docker stop $1 }
 function drm() { docker rm $1 }
 function drmi() { docker rmi $1 }
+# shortcut to devserver
+alias de='de devserver'
