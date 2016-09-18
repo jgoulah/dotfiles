@@ -84,4 +84,4 @@ function ds() { docker stop $1 }
 function drm() { docker rm $1 }
 function drmi() { docker rmi $1 }
 # shortcut to devserver
-alias de='de devserver'
+alias dev='de devserver'
