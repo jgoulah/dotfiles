@@ -71,6 +71,12 @@ if [ ! -d $installdir/.ssh ]; then
     makelink $cur/ssh    $installdir/.ssh
 fi
 
+# put secrets in place
+secrets_dir=~/.dotfiles-secrets
+if [ -d "$secrets_dir" ]; then
+    makelink $secrets_dir/ssh-config    $installdir/.ssh/config
+fi
+
 if [ $home_install == "true" ]; then
   touch ~/.dotfiles-installed
 fi
