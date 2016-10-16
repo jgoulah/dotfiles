@@ -74,3 +74,8 @@ fi
 if [ -f /opt/chefdk/bin/chef ]; then
   eval "$(chef shell-init zsh)"
 fi
+
+# rust
+if [ -f $HOME/.cargo/env ]; then
+    source $HOME/.cargo/env
+fi
