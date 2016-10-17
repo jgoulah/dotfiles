@@ -1,6 +1,8 @@
 #!/bin/bash
 
-for i in '/home/jgoulah/wdir/chef /home/jgoulah/dev/deployinator' ; do 
+mkdir -p ~/.vimtags
+
+for i in '/app/primary' ; do 
     echo "tagging $i"
     name=${i##*\/}
     echo "name is $name"
