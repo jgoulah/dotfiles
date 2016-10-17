@@ -1,4 +1,4 @@
-export PATH=/sbin:/usr/sbin:~/bin:/usr/local/bin:/usr/bin:/bin
+export PATH=/sbin:/usr/sbin:/usr/local/sbin:~/bin:/usr/local/bin:/usr/bin:/bin
 # go
 export GOROOT=/usr/local/go
 export GOPATH=$HOME/wdir/go
