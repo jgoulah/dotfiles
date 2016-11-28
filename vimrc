@@ -81,6 +81,8 @@ vmap  O  :call NERDComment(1, 'toggle')<CR>
 silent execute '!mkdir -p $HOME/.vim/tmp/yankring'
 let g:yankring_history_dir = '$HOME/.vim/tmp/yankring'
 let g:yankring_manage_numbered_reg = 1
+let g:yankring_min_element_length = 2
+let g:yankring_max_display = 85
 
 " open tag in new window
 map <C-\> :tab split<CR>:exec("ts ".expand("<cword>"))<CR>
@@ -175,7 +177,7 @@ nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
 nnoremap ; :
 
-" list all previously yanked text with <F3>
+" yankring - list all previously yanked text with <F5>
 nnoremap <silent> <F5> :YRShow<cr>
 inoremap <silent> <F5> n_url<ESC>:YRShow<cr>
 
@@ -222,3 +224,19 @@ noremap  <C-]>  g<C-]>
 " go format
 let g:gofmt_command = "goimports"
 autocmd BufWritePre *.go Fmt
+
+" pathogen
+execute pathogen#infect()
+
+" syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 1
+"let g:syntastic_ruby_rubocop_exec = '/app/primary/rubocop'
+"let g:syntastic_ruby_checkers = ['mri', 'rubocop']
+" disable 'assigned but unused variable' warnings
+let g:syntastic_quiet_messages = { "regex": 'assigned but unused' }
