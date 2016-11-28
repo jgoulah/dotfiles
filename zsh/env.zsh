@@ -77,5 +77,6 @@ fi
 
 # rust
 if [ -f $HOME/.cargo/env ]; then
-    source $HOME/.cargo/env
+    CARGO_HOME=$HOME/.cargo
+    source $CARGO_HOME/env
 fi
