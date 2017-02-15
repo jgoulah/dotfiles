@@ -26,6 +26,7 @@ set shiftwidth=4
 set expandtab
 set autoindent
 autocmd Filetype ruby setlocal ts=2 sts=2 sw=2
+autocmd Filetype coffee setlocal ts=2 sts=2 sw=2
 autocmd Filetype go setlocal noet ts=4 sw=4 sts=4
 
 set ttyfast
