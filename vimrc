@@ -84,6 +84,13 @@ let g:yankring_history_dir = '$HOME/.vim/tmp/yankring'
 let g:yankring_manage_numbered_reg = 1
 let g:yankring_min_element_length = 2
 let g:yankring_max_display = 85
+let g:yankring_replace_n_pkey = '<leader>['
+let g:yankring_replace_n_nkey = '<leader>]'
+" ,y to show the yankring
+nmap <leader>y :YRShow<cr>
+" also show with <F5>
+nnoremap <silent> <F5> :YRShow<cr>
+inoremap <silent> <F5> n_url<ESC>:YRShow<cr>
 
 " open tag in new window
 map <C-\> :tab split<CR>:exec("ts ".expand("<cword>"))<CR>
@@ -178,9 +185,6 @@ nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
 nnoremap ; :
 
-" yankring - list all previously yanked text with <F5>
-nnoremap <silent> <F5> :YRShow<cr>
-inoremap <silent> <F5> n_url<ESC>:YRShow<cr>
 
 " toggle nerd tree with <F2>
 map <F2> :NERDTreeTabsToggle<CR>
@@ -241,3 +245,11 @@ let g:syntastic_check_on_wq = 1
 "let g:syntastic_ruby_checkers = ['mri', 'rubocop']
 " disable 'assigned but unused variable' warnings
 let g:syntastic_quiet_messages = { "regex": 'assigned but unused' }
+
+" ctrl-p
+let g:ctrlp_map = '<leader>,'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+let g:ctrlp_use_caching = 0
+let g:ctrlp_follow_symlinks = 1
