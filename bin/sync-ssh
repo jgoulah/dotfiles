@@ -1,6 +1,6 @@
 #!/bin/zsh
 
 host=$1
-rsync -auv --exclude id_dsa ~/.ssh jgoulah@$host:
+rsync -auv --exclude id_dsa ~/.ssh $host:
 ln -sf ~/bin/ssh-to ~/bin/$host
 . ~/.zshrc
