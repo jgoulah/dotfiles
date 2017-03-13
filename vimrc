@@ -154,9 +154,6 @@ cmap w!! w !sudo tee % >/dev/null
 " just command line to open file with ,t
 nmap <leader>t <Esc>:tabe 
 
-" use command-t plugin with ,ct
-nmap <silent> <leader>ct <Esc>:tabe<CR>:CommandT<CR>
-
 " use ,W to strip all trailing whitespace
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 
