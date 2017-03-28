@@ -8,6 +8,7 @@ shell "/usr/bin/zsh"
 
 defflow auto
 defscrollback 500000
+bind '/' eval "clear" "scrollback 0" "scrollback 500000"
 
 #change the hardstatus settings to give an window list at the bottom of the                                                                        
 #screen, with the time and date and with the current window highlighted                                                                            

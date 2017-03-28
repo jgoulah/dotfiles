@@ -85,3 +85,12 @@ function drm() { docker rm $1 }
 function drmi() { docker rmi $1 }
 # shortcut to devserver
 alias dev='de devserver'
+
+# restore deleted file from previous unknown commit 
+function restore-file() { git checkout $(git rev-list -n 1 HEAD -- "$1")^ -- "$1" }
+# checkout a pull request
+function co-pr() {
+  id=$1
+  branch=$2
+  git fetch origin pull/$id/head:$branch
+}
