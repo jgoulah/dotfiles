@@ -14,6 +14,7 @@ set -o emacs
 
 export PERL_MM_USE_DEFAULT=1
 export EDITOR=vim
+export CHEF_DIR=~/dev/chef
 
 export TERM=xterm-256color
 export LANG="en_US.UTF-8"
