@@ -1,4 +1,14 @@
-export PATH=/sbin:/usr/sbin:/usr/local/sbin:~/bin:/usr/local/bin:/usr/bin:/bin
+# source chef dk env vars
+if [ -f /opt/chefdk/bin/chef ]; then
+  eval "$(chef shell-init zsh)"
+fi
+
+# to load the brew curl with http2 support
+if [ -d /usr/local/opt/curl/bin ]; then
+  export PATH=/usr/local/opt/curl/bin:$PATH
+fi
+
+export PATH=$PATH:/sbin:/usr/sbin:/usr/local/sbin:~/bin:/usr/local/bin:/usr/bin:/bin
 # go
 export GOROOT=/usr/local/go
 export GOPATH=$HOME/wdir/go
@@ -71,10 +81,6 @@ if [ -d $ec2_tools ]; then
   export PATH=$PATH:$EC2_HOME/bin
 fi
 
-# source chef dk env vars
-if [ -f /opt/chefdk/bin/chef ]; then
-  eval "$(chef shell-init zsh)"
-fi
 
 # rust
 if [ -f $HOME/.cargo/env ]; then
