@@ -84,13 +84,7 @@ function ds() { docker stop $1 }
 function drm() { docker rm $1 }
 function drmi() { docker rmi $1 }
 # shortcut to devserver
-function dev() {
-    # set host
-    echo -n -e "\033kdev\033\134"
-    cd ~/dev/vagrant && DEV_MODE=true vagrant ssh -- -l jgoulah -i ~/.ssh/goulah-rsa
-    # set hostname back when session is done (-s on osx)
-    echo -n -e "\033k`hostname -s`\033\134"
-}
+alias dev='de devserver'
 
 # restore deleted file from previous unknown commit 
 function restore-file() { git checkout $(git rev-list -n 1 HEAD -- "$1")^ -- "$1" }
@@ -100,3 +94,6 @@ function co-pr() {
   branch=$2
   git fetch origin pull/$id/head:$branch
 }
+
+# pass a raw gist url and apply to git repo
+function gist-apply() { wget -qO- $1 | git apply }
