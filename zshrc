@@ -12,7 +12,11 @@ export ZSH=$HOME/.oh-my-zsh
 #export ZSH_THEME="bira"
 #export ZSH_THEME="steeef"
 #export ZSH_THEME="tonotdo"
-export ZSH_THEME="kphoen"
+#export ZSH_THEME="kphoen"
+export ZSH_THEME="agnoster"
+#export ZSH_THEME="powerlevel9k/powerlevel9k"
+
+export DEFAULT_USER="jgoulah"
 
 
 
