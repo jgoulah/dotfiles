@@ -11,10 +11,14 @@ fi
 export PATH=$PATH:/sbin:/usr/sbin:/usr/local/sbin:~/bin:/usr/local/bin:/usr/bin:/bin
 # go
 export GOROOT=/usr/local/go
-export GOPATH=$HOME/wdir/go
+export GOPATH=$HOME/dev/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 # versionswitcher
 export VS_HOME=$HOME/.lang
+
+# infrakit
+export INFRAKIT_HOME=~/.infrakit
+export INFRAKIT_HOST=localhost
 
 # default node path
 export NODE_PATH=/usr/local/lib/node_modules

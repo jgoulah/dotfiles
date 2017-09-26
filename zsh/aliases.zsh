@@ -30,6 +30,9 @@ alias curltime='curl -o /dev/null -s -w '\''Return Code = %{http_code}\nBytes re
 # curl akamai headers
 alias curl-akamai='curl -I -H "Pragma: akamai-x-cache-on, akamai-x-cache-remote-on, akamai-x-check-cacheable, akamai-x-get-cache-key, akamai-x-get-true-cache-key"'
 
+# curl headers
+alias curl-headers='curl -svo /dev/null'
+
 # knife-dev 
 function knife-dev() { /usr/bin/knife $@ -c ~/.chef/knifedev.rb ;}
 
@@ -97,3 +100,7 @@ function co-pr() {
 
 # pass a raw gist url and apply to git repo
 function gist-apply() { wget -qO- $1 | git apply }
+
+# rubocop
+alias rub='bundle exec rubocop'
+alias rubfix='bundle exec rubocop --auto-correct'
