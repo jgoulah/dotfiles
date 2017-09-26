@@ -7,18 +7,11 @@ set statusline=%F%m%r%h%w\ %y\ [lines=%L]\ [x=%04v][y=%04l][%p%%]
 set laststatus=2
 
 " colors
-syntax enable 
-"set t_Co=256
-set background=dark
-"let g:solarized_termcolors=16
-"let g:solarized_termtrans=1
-"colorscheme solarized
-    colorscheme oceanblack 
-    "colors darkblue
-    "colorscheme mustang 
-    "colorscheme symfony 
-    "colorscheme clouds-midnight 
-    "colorscheme wombat256  
+syntax enable
+" fix bg color for screen/tmux http://bit.ly/2xyzST9
+set t_ut=
+" colorscheme
+colorscheme oceanblack
 
 " tabspacing
 set tabstop=4
