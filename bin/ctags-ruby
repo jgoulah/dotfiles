@@ -8,6 +8,7 @@ for i in '/app/primary' ; do
     echo "name is $name"
     pushd $i
     ctags -f ~/.vimtags/${name}.ruby -R \
+    --exclude=*.js --exclude=*.scss --exclude=gulp \
     --links=no \
     --totals=yes \
     --tag-relative=yes
