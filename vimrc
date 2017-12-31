@@ -1,10 +1,10 @@
+" pathogen plugins
+execute pathogen#infect()
+call pathogen#helptags()
+
 set nocompatible
 filetype on
 filetype plugin on
-
-" statusline
-set statusline=%F%m%r%h%w\ %y\ [lines=%L]\ [x=%04v][y=%04l][%p%%]
-set laststatus=2
 
 " colors
 syntax enable
@@ -66,8 +66,6 @@ let mapleader=","
 inoremap jj <ESC>
 
 " commenting in visual mode
-"vmap  o  :s/^/#/<CR>    
-"vmap  O  :s/^#//<CR>   
 vmap  o  :call NERDComment(1, 'toggle')<CR>
 vmap  O  :call NERDComment(1, 'toggle')<CR>
 
@@ -218,9 +216,6 @@ noremap  <C-]>  g<C-]>
 let g:gofmt_command = "goimports"
 autocmd BufWritePre *.go Fmt
 
-" pathogen
-execute pathogen#infect()
-
 " syntastic
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
@@ -245,3 +240,8 @@ let g:ctrlp_prompt_mappings = {
     \ 'AcceptSelection("e")': ['<2-LeftMouse>'],
     \ 'AcceptSelection("t")': ['<cr>'],
     \ }
+
+" vim-airline
+let g:airline_theme='solarized'
+set noshowmode
+set ttimeoutlen=10
