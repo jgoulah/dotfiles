@@ -77,8 +77,6 @@ let g:yankring_history_dir = '$HOME/.vim/tmp/yankring'
 let g:yankring_manage_numbered_reg = 1
 let g:yankring_min_element_length = 2
 let g:yankring_max_display = 85
-let g:yankring_replace_n_pkey = '<leader>['
-let g:yankring_replace_n_nkey = '<leader>]'
 " ,y to show the yankring
 nmap <leader>y :YRShow<cr>
 " also show with <F5>
