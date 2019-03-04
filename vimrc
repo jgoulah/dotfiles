@@ -187,9 +187,9 @@ nnoremap <S-F6> <C-W>W
 set pastetoggle=<F12> 
 
 " function to loop through a specified path and include each tag file
-if has('python')
+if has('python3')
 function! BuildTagsFromPath()
-python << EOF
+python3 << EOF
 import os
 import vim
 
