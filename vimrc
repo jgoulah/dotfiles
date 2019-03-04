@@ -245,3 +245,6 @@ let g:ctrlp_prompt_mappings = {
 let g:airline_theme='solarized'
 set noshowmode
 set ttimeoutlen=10
+
+" gbrowse from fugitive
+map <leader>gb :Gbrowse!<cr>
