@@ -109,3 +109,9 @@ function gist-apply() { wget -qO- $1 | git apply }
 # rubocop
 alias rub='bundle exec rubocop'
 alias rubfix='bundle exec rubocop --auto-correct'
+
+#python
+if [ -f '/usr/local/bin/python3.8' ]; then
+  alias python='/usr/local/bin/python3.8'
+  alias pip='/usr/local/bin/pip3.8'
+fi
