@@ -75,24 +75,10 @@ function fix-host() { sed -i -e "$1 d" ~/.ssh/known_hosts }
 alias dps='docker ps'
 alias dsl='docker ps -l'
 alias di='docker images'
-function de() {
-    #docker exec -it $1 /bin/bash
-    # for a psedo tty to run screen
-    docker exec -it -u jgoulah $1 script -q -c "/bin/zsh" /dev/null
-}
-function dl() {
-  docker exec -it -u jgoulah $(docker ps -q | head -n1) script -q -c "/bin/zsh" /dev/null
-}
+alias dc='docker-compose'
 function ds() { docker stop $1 }
 function drm() { docker rm $1 }
 function drmi() { docker rmi $1 }
-# docker-compose dev stuff 
-alias dc='docker-compose'
-alias dev='dc exec web-dev'
-alias dev-restart='dc restart web-dev'
-alias dr='dev-restart'
-alias dev-logs='dc logs -f web-dev'
-alias dl='dev-logs'
 
 # restore deleted file from previous unknown commit 
 function restore-file() { git checkout $(git rev-list -n 1 HEAD -- "$1")^ -- "$1" }
