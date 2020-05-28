@@ -1,0 +1,20 @@
+{
+    "go.formatTool": "goimports",
+    "go.useLanguageServer": true,
+    "vim.leader": ",",
+    "vim.easymotion": true,
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+          "before": ["<leader>", "t"],
+          "commands": ["workbench.action.toggleSidebarVisibility"]
+        },
+        {
+          "before": ["<leader>", "f"],
+          "commands": [ "revealInExplorer" ],
+        },
+        {
+          "before": ["<leader>", "r", "f"],
+          "commands": [ "fileutils.renameFile" ]
+        }
+      ]
+}
