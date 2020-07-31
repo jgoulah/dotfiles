@@ -16,5 +16,7 @@
           "before": ["<leader>", "r", "f"],
           "commands": [ "fileutils.renameFile" ]
         }
-      ]
+      ],
+      "workbench.editor.enablePreview": false,
+      "workbench.editor.enablePreviewFromQuickOpen": false
 }
