@@ -216,19 +216,6 @@ noremap  <C-]>  g<C-]>
 let g:gofmt_command = "goimports"
 autocmd BufWritePre *.go Fmt
 
-" syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
-"let g:syntastic_ruby_rubocop_exec = '/app/primary/rubocop'
-"let g:syntastic_ruby_checkers = ['mri', 'rubocop']
-" disable 'assigned but unused variable' warnings
-let g:syntastic_quiet_messages = { "regex": 'assigned but unused' }
-
 " ctrl-p
 let g:ctrlp_map = '<leader>,'
 let g:ctrlp_cmd = 'CtrlP'
