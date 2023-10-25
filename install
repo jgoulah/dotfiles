@@ -1,32 +1,16 @@
 #!/bin/bash
 #
 # INSTALLATION
-#   normally just: ./install
-#   or to put files into chef:
-#   NO_BACKUP=true ./install ~/dev/chef/cookbooks/homedirs/files/default/jgoulah
+#   ./install
 #
 installdir=~
-home_install=true
-if [ -n "$1" ]; then
-  installdir=$1
-  home_install=false
-fi
 
 function makelink {
     target=$1
     link_name=$2
 
-    if [ $home_install == "true" ]; then
-      echo "linking $target to $link_name"
-      ln -nfs "$target" "$link_name"
-    else
-      echo "copying $target to $link_name"
-      if [ -d $target ]; then
-        target="$target/"
-        link_name="$link_name/"
-      fi
-      rsync -auv $target $link_name
-    fi
+    echo "linking $target to $link_name"
+    ln -nfs "$target" "$link_name"
 }
 
 # since readlink -f doesn't work in osx
@@ -38,6 +22,12 @@ function abspath() {
 export GIT_SSL_NO_VERIFY=true
 if [ ! -d ~/.oh-my-zsh ]; then
   wget --no-check-certificate https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
+fi
+
+# install ultimate vim
+if [ ! -d ~/.vim_runtime ]; then
+    git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
+    sh ~/.vim_runtime/install_awesome_vimrc.sh
 fi
 
 #backup old stuff
@@ -53,8 +43,7 @@ fi
 
 cur=$(dirname "$(abspath $0)")
 
-makelink $cur/vimrc           $installdir/.vimrc
-makelink $cur/dotvim          $installdir/.vim
+makelink $cur/my_configs.vim  $installdir/.vim_runtime/my_configs.vim
 makelink $cur/bashrc          $installdir/.bashrc
 makelink $cur/bash            $installdir/.bash
 makelink $cur/irbrc           $installdir/.irbrc
@@ -79,6 +68,4 @@ if [ -d "$secrets_dir" ]; then
     makelink $secrets_dir/ssh-config    $installdir/.ssh/config
 fi
 
-if [ $home_install == "true" ]; then
-  touch ~/.dotfiles-installed
-fi
+touch ~/.dotfiles-installed
