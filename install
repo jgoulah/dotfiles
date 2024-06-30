@@ -24,10 +24,9 @@ if [ ! -d ~/.oh-my-zsh ]; then
   wget --no-check-certificate https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | sh
 fi
 
-# install ultimate vim
-if [ ! -d ~/.vim_runtime ]; then
-    git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
-    sh ~/.vim_runtime/install_awesome_vimrc.sh
+# install lunar vim 
+if [ ! -d ~/.config/lvim ]; then
+    LV_BRANCH='release-1.4/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.4/neovim-0.9/utils/installer/install.sh)
 fi
 
 #backup old stuff
@@ -43,7 +42,7 @@ fi
 
 cur=$(dirname "$(abspath $0)")
 
-makelink $cur/my_configs.vim  $installdir/.vim_runtime/my_configs.vim
+makelink $cur/config.lua      $installdir/.config/lvim/config.lua
 makelink $cur/bashrc          $installdir/.bashrc
 makelink $cur/bash            $installdir/.bash
 makelink $cur/irbrc           $installdir/.irbrc
