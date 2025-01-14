@@ -1,19 +1,9 @@
 // Place your key bindings in this file to override the defaults
 [
     {
-        "key": "n",
-        "command": "goToNextReferenceFromEmbeddedEditor",
-        "when": "inReferenceSearchEditor"
-    },
-    {
         "key": "shift+n",
         "command": "goToPreviousReferenceFromEmbeddedEditor",
         "when": "inReferenceSearchEditor"
-    },
-    {
-        "key": "n",
-        "command": "search.action.focusNextSearchResult",
-        "when": "hasSearchResult"
     },
     {
         "key": "shift+n",
@@ -21,19 +11,9 @@
         "when": "hasSearchResult"
     },
     {
-        "key": "n",
-        "command": "goToNextReference",
-        "when": "referenceSearchVisible"
-    },
-    {
         "key": "shift+n",
         "command": "goToPreviousReference",
         "when": "referenceSearchVisible"
-    },
-    {
-        "key": "n",
-        "command": "references-view.next",
-        "when": "reference-list.hasResult"
     },
     {
         "key": "shift+n",

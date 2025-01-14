@@ -18,5 +18,7 @@
         }
       ],
       "workbench.editor.enablePreview": false,
-      "workbench.editor.enablePreviewFromQuickOpen": false
+      "workbench.editor.enablePreviewFromQuickOpen": false,
+      "editor.fontSize": 14,
+      "editor.minimap.enabled": false
 }
