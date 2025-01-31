@@ -20,5 +20,8 @@
       "workbench.editor.enablePreview": false,
       "workbench.editor.enablePreviewFromQuickOpen": false,
       "editor.fontSize": 14,
-      "editor.minimap.enabled": false
+      "editor.minimap.enabled": false,
+      "css.validate": false,
+      "less.validate": false,
+      "scss.validate": false
 }
