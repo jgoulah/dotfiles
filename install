@@ -31,7 +31,7 @@ fi
 
 #backup old stuff
 if [ -z "$NO_BACKUP" -o "$NO_BACKUP" != "true" ]; then
-    files=( .vimrc .vim .gitconfig .bashrc .bash .irbrc .ackrc .screenrc bin .zshrc .oh-my-zsh/custom/aliases.zsh .oh-my-zsh/custom/env.zsh '.vscode/settings.json' '.vscode/keybindings.json' )
+    files=( .vimrc .vim .gitconfig .bashrc .bash .irbrc .ackrc .screenrc .tmux.conf bin .zshrc .oh-my-zsh/custom/aliases.zsh .oh-my-zsh/custom/env.zsh '.vscode/settings.json' '.vscode/keybindings.json' )
     for file in "${files[@]}"; do
         if [ -e "$HOME/$file" ] && [ ! -h "$HOME/$file" ]; then
             echo "$file exists"
@@ -48,6 +48,7 @@ makelink $cur/bash            $installdir/.bash
 makelink $cur/irbrc           $installdir/.irbrc
 makelink $cur/ackrc           $installdir/.ackrc
 makelink $cur/screenrc        $installdir/.screenrc
+makelink $cur/tmux.conf       $installdir/.tmux.conf
 makelink $cur/bin             $installdir/bin
 makelink $cur/zshrc           $installdir/.zshrc
 makelink $cur/zsh/aliases.zsh $installdir/.oh-my-zsh/custom/
