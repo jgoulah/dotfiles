@@ -1,1 +1,21 @@
 // Place your key bindings in this file to override the defaults
+[
+    {
+      "key": "shift+h",
+      "command": "workbench.action.previousEditor"
+    },
+    {
+      "key": "shift+l",
+      "command": "workbench.action.nextEditor"
+    },
+    {
+      "key": "o",
+      "command": "editor.action.commentLine",
+      "when": "editorTextFocus && vim.active && vim.mode =~ /^Visual/"
+    },
+    {
+      "key": "shift+o",
+      "command": "editor.action.blockComment",
+      "when": "editorTextFocus && vim.active && vim.mode =~ /^Visual/"
+    }
+]
