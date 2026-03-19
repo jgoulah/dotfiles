@@ -23,5 +23,9 @@
       "editor.minimap.enabled": false,
       "css.validate": false,
       "less.validate": false,
-      "scss.validate": false
+      "scss.validate": false,
+      "claudeCode.preferredLocation": "panel",
+      "github.copilot.chat.anthropic.tools.websearch.maxUses": 8,
+      "python.defaultInterpreterPath": "/opt/homebrew/bin/python3",
+      "claudeCode.claudeProcessWrapper": "/Users/jgoulah/.local/bin/claude"
 }

@@ -3,7 +3,7 @@ escape ``
 autodetach on
 startup_message off 
 
-shell "/usr/bin/zsh"
+shell "/bin/zsh"
 #altscreen on
 
 defflow auto

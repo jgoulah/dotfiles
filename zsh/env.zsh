@@ -1,16 +1,13 @@
-# source chef dk env vars
-if [ -f /opt/chefdk/bin/chef ]; then
-  eval "$(chef shell-init zsh)"
-fi
 
-# to load the brew curl with http2 support
-if [ -d /usr/local/opt/curl/bin ]; then
-  export PATH=/usr/local/opt/curl/bin:$PATH
-fi
+PATH=/sbin:/usr/sbin:/usr/local/sbin:~/bin:/usr/local/bin:/usr/bin:/bin
+PATH=/opt/homebrew/bin/:$PATH
+export PATH
 
-export PATH=$PATH:/sbin:/usr/sbin:/usr/local/sbin:~/bin:/usr/local/bin:/usr/bin:/bin
+#claude
+export ENABLE_LSP_TOOL=1
+
 # go
-export GOPATH=$HOME/dev/go
+export GOPATH=/usr/local/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 # versionswitcher
 export VS_HOME=$HOME/.lang

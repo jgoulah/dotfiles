@@ -54,3 +54,5 @@
 	extension = .md
 [push]
 	default = simple
+[pull]
+	rebase = false
