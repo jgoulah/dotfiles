@@ -42,8 +42,8 @@ fi
 
 cur=$(dirname "$(abspath $0)")
 
-mkdir -p $cur/.config/ghostty
-mkdir -p $cur/vscode
+mkdir -p ~/.config/ghostty
+mkdir -p ~/vscode
 
 makelink $cur/config.lua      $installdir/.config/lvim/config.lua
 makelink $cur/bashrc          $installdir/.bashrc
