@@ -42,6 +42,9 @@ fi
 
 cur=$(dirname "$(abspath $0)")
 
+mkdir -p $cur/.config/ghostty
+mkdir -p $cur/vscode
+
 makelink $cur/config.lua      $installdir/.config/lvim/config.lua
 makelink $cur/bashrc          $installdir/.bashrc
 makelink $cur/bash            $installdir/.bash
@@ -56,6 +59,8 @@ makelink $cur/zsh/env.zsh     $installdir/.oh-my-zsh/custom/
 makelink $cur/gitconfig       $installdir/.gitconfig
 makelink $cur/vscode/settings.json     "$installdir/.vscode/settings.json"
 makelink $cur/vscode/keybindings.json  "$installdir/.vscode/keybindings.json"
+makelink $cur/ghostty.conf    $installdir/.config/ghostty/config
+
 
 #only if ssh dir isn't already there...
 if [ ! -d $installdir/.ssh ]; then
